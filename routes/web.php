@@ -10,6 +10,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/about-us', [App\Http\Controllers\User\UserDashboardController::class, 'about']);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
