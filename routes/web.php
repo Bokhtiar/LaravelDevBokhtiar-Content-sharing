@@ -3,17 +3,27 @@
 use App\Http\Controllers\Admin\AboutUsController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\TopHeaderController;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
-    return view('welcome');
+    $category = Category::find(1);//for slider active
+    $categories = Category::query()->Active()->index();
+    return view('welcome',compact('category', 'categories'));
 });
 
 Auth::routes();
 
+Route::get('/blog', function () {
+    return view('home');
+});
+
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/blog', [App\Http\Controllers\User\UserDashboardController::class, 'blog']);
 
 Route::group([ "as"=>'user.' , "prefix"=>'user' , "namespace"=>'User' , "middleware"=>['auth','user']],function(){
     Route::get('/dashboard', [App\Http\Controllers\User\UserDashboardController::class, 'index'])->name('dashboard');
@@ -36,4 +46,7 @@ Route::group([ "as"=>'admin.' , "prefix"=>'admin' , "middleware"=>['auth','admin
     Route::resource('topheader', TopHeaderController::class);
     //about
     Route::resource('about', AboutUsController::class);
+    //slider
+    Route::resource('slider', SliderController::class);
+
 });

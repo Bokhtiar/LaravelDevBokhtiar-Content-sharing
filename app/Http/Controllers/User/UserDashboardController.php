@@ -12,8 +12,9 @@ class UserDashboardController extends Controller
         return view('user.index');
     }
 
-    public function about()
+    public function blog()
     {
-        return view('user.about');
+        return view('home');
     }
+
 }

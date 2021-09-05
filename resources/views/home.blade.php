@@ -1,12 +1,15 @@
 @extends('layouts.user.app')
 @section('user_content')
 
-<div class="container my-3">
+<div class="container my-5" id="blog">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Dashboard') }}</div>
-
+                sdasdfasdfasdf
+                asdf
+                as
+                dfasdfasdfasdfasdfasdfasdfasdfasdfsadfwew
                 <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">

@@ -21,11 +21,12 @@
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-          <li><a href="{{ url('/') }}">Home</a></li>
+          <li><a href="http://localhost:8000/#home">Home</a></li>
           <li><a href="http://localhost:8000/#about">About</a></li>
           <li><a href="http://localhost:8000/#services">Services</a></li>
-          <li class="active"><a href="blog.html">Blog</a></li>
-          <li class="drop-down"><a href="">Google Serive</a>
+          <li><a href="http://localhost:8000/#blog">Blog</a></li>
+          <li><a href="http://localhost:8000/#google_product">Google_product</a></li>
+          {{-- <li class="drop-down"><a href="http://localhost:8000/#google_service">Google Serive</a>
             <ul>
               <li><a href="#">Drop Down 1</a></li>
               <li class="drop-down"><a href="#">Deep Drop Down</a>
@@ -41,8 +42,8 @@
               <li><a href="#">Drop Down 3</a></li>
               <li><a href="#">Drop Down 4</a></li>
             </ul>
-          </li>
-          <li><a href="index.html#contact">Contact</a></li>
+          </li> --}}
+          <li><a href="http://localhost:8000/#contact">Contact</a></li>
 
         </ul>
       </nav><!-- .nav-menu -->

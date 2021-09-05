@@ -60,117 +60,6 @@
 
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-pie-chart"></i>
-              <p>
-                Product
-                <i class="right fa fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ url('admin/product') }}" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>All Product</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ url('admin/product/create') }}" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Create New Product</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-pie-chart"></i>
-              <p>
-                Product Attributes
-                <i class="right fa fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{url('admin.attribute.index')}}" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>All Attributes</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-pie-chart"></i>
-              <p>
-                 Attributes Values
-                <i class="right fa fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{url('admin.attributeValue.index')}}" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>All Attributes Values</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-pie-chart"></i>
-              <p>
-                 Colors
-                <i class="right fa fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{url('admin.color.index')}}" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>All Colors</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-pie-chart"></i>
-              <p>
-                 Products
-                <i class="right fa fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{url('admin.product.index')}}" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>All Product</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{url('admin.product.create')}}" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Create New Product</p>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a href="{{url('admin.variant.create')}}" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Create Product Variant</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
               <i class="nav-icon fa fa-tree"></i>
               <p>
                 Orders
@@ -182,24 +71,6 @@
                 <a href="{{ url('admin/order/index') }}" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>All Order</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-tree"></i>
-              <p>
-                Pre-Order
-                <i class="fa fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ url('admin/preOrder/index') }}" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>All Pre-Order</p>
                 </a>
               </li>
             </ul>
@@ -259,6 +130,12 @@
                 <a href="{{ url('admin/about/create') }}" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>About-Us</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url('admin/slider') }}" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>Slider</p>
                 </a>
               </li>
             </ul>
