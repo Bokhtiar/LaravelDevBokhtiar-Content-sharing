@@ -1,8 +1,9 @@
 <?php
 
-
+use App\Http\Controllers\Admin\AboutUsController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\TopHeaderController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -10,7 +11,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/about-us', [App\Http\Controllers\User\UserDashboardController::class, 'about']);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -32,5 +32,8 @@ Route::group([ "as"=>'admin.' , "prefix"=>'admin' , "middleware"=>['auth','admin
     //product
     Route::resource('product', ProductController::class);
     Route::get('/product/status/{id}', [App\Http\Controllers\Admin\ProductController::class, 'status']);
-
+    //top headers
+    Route::resource('topheader', TopHeaderController::class);
+    //about
+    Route::resource('about', AboutUsController::class);
 });

@@ -240,6 +240,30 @@
               </li>
             </ul>
           </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fa fa-tree"></i>
+              <p>
+                Web Settings
+                <i class="fa fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ url('admin/topheader/create') }}" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>Top Header</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url('admin/about/create') }}" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>About-Us</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
