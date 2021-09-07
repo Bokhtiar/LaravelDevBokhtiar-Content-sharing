@@ -31,9 +31,6 @@ class AppServiceProvider extends ServiceProvider
             $view->with('topheader', TopHeaders::find(1));
         });
         view()->composer('*', function($view) {
-            $view->with('products', count(Product::all()) );
-        });
-        view()->composer('*', function($view) {
             $view->with('front_categories', Category::query()->Active()->get());
         });
         view()->composer('*', function($view) {
