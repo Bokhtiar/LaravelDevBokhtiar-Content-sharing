@@ -17,7 +17,7 @@ class TopHeaderController extends Controller
 
     public function update(Request $request, $id)
     {
-        $validated = $request->validate([
+        $validated = $request->validat
             'website_name'=>'required',
             'email' => 'required',
             'phone' => 'required',

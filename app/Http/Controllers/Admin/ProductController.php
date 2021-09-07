@@ -162,4 +162,11 @@ class ProductController extends Controller
         Category::query()->Status($product);
         return back();
     }
+
+    public function search(Request $request)
+    {
+        $products = Product::query()->SearchBy($request->search_key)->get();
+        $search= $request->search_key; //we are using product index show on product search key there for condition is if search value have not show product heading
+        return view('admin.product.index', compact('products','search'));
+    }
 }

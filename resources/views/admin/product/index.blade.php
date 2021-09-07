@@ -11,7 +11,8 @@
         <div class="col-12">
         <div class="card">
             <div class="card-header">
-            <h2 class="card-title">LIST OF CATEGORY </h2>
+
+            <h2 class="card-title"> {{ isset($search) ? "Product Search List" : "List Of Product" }}  </h2>
                 <div class="card-tools">
                     <div class="form-inline input-group input-group-sm" style="width: 180px;">
                         <input type="text" id="search_key" name="search_key" class="form-control float-right" placeholder="Search">

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AboutUsController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\TopHeaderController;
@@ -23,7 +24,7 @@ Route::get('/blog', function () {
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-// Route::get('/blog', [App\Http\Controllers\User\UserDashboardController::class, 'blog']);
+Route::post('contact/store', [App\Http\Controllers\User\ContactController::class, 'store']);
 
 Route::group([ "as"=>'user.' , "prefix"=>'user' , "namespace"=>'User' , "middleware"=>['auth','user']],function(){
     Route::get('/dashboard', [App\Http\Controllers\User\UserDashboardController::class, 'index'])->name('dashboard');
@@ -42,11 +43,15 @@ Route::group([ "as"=>'admin.' , "prefix"=>'admin' , "middleware"=>['auth','admin
     //product
     Route::resource('product', ProductController::class);
     Route::get('/product/status/{id}', [App\Http\Controllers\Admin\ProductController::class, 'status']);
+    Route::post('/product/search', [App\Http\Controllers\Admin\ProductController::class, 'search']);
     //top headers
     Route::resource('topheader', TopHeaderController::class);
     //about
     Route::resource('about', AboutUsController::class);
     //slider
     Route::resource('slider', SliderController::class);
+    //contact
+    Route::resource('contact', ContactController::class);
+    Route::get('/contact/status/{id}', [App\Http\Controllers\Admin\ContactController::class, 'status']);
 
 });

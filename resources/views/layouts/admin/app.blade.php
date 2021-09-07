@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>AdminLTE 3 |</title>
+  <title>Google | Products</title>
 
   <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/ba78558982.js" crossorigin="anonymous"></script>
@@ -53,8 +53,6 @@
 <!-- OPTIONAL SCRIPTS -->
 <script src="{{ asset('admin') }}/dist/js/demo.js"></script>
 
-<!-- PAGE PLUGINS -->
-<!-- SparkLine -->
 <script src="{{ asset('admin') }}/plugins/sparkline/jquery.sparkline.min.js"></script>
 <!-- jVectorMap -->
 <script src="{{ asset('admin') }}/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
@@ -66,6 +64,64 @@
 
 <!-- PAGE SCRIPTS -->
 <script src="{{ asset('admin') }}/dist/js/pages/dashboard2.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js" charset="utf-8"></script>
+
+
+
+
+
+@if(Session::has('insert'))
+  <script type="text/javascript">
+    swal("Inserted Data","Added Sucessfully...","success")
+  </script>
+@endif
+
+
+@if(Session::has('update'))
+  <script type="text/javascript">
+    swal("Updated Data","Update Sucessfully...","success")
+  </script>
+@endif
+
+@if(Session::has('delete'))
+  <script type="text/javascript">
+    swal("delete Successfully","delete secessfully","success")
+  </script>
+@endif
+
+@if(Session::has('inactive'))
+  <script type="text/javascript">
+    swal("Incomplate","Incomplate Unsuccessfully","success")
+  </script>
+@endif
+
+@if(Session::has('Active'))
+  <script type="text/javascript">
+    swal("Complate","Complate Successfully","success")
+  </script>
+@endif
+
+@if(Session::has('reset_password'))
+  <script type="text/javascript">
+    swal("Enter your valid Password","Dont matched the password plz inter your valid password...","success")
+  </script>
+@endif
+
+
+<script type="text/javascript">
+
+$(document).on("click","#delete",function(e){
+e.preventDefault();
+var link=$(this).attr("href");
+bootbox.confirm("are you want to delete",function(confirmed){
+  if(confirmed){
+    window.location.href=link;
+};
+});
+});
+</script>
 @yield('js')
 
 

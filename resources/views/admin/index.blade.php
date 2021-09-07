@@ -33,9 +33,9 @@
               <span class="info-box-icon bg-info elevation-1"><i class="fa fa-gear"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">CPU Traffic</span>
+                <span class="info-box-text">Contact Info</span>
                 <span class="info-box-number">
-                  10
+                  {{products}}
                   <small>%</small>
                 </span>
               </div>
