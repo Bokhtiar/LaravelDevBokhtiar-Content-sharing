@@ -15,9 +15,9 @@
             <h2 class="card-title"> {{ isset($search) ? "Product Search List" : "List Of Product" }}  </h2>
                 <div class="card-tools">
                     <div class="form-inline input-group input-group-sm" style="width: 180px;">
-                        <input type="text" id="search_key" name="search_key" class="form-control float-right" placeholder="Search">
+                        <a class="btn btn-primary" href="{{ url('admin/product/create') }}">Create New Product</a>
                         <div class="input-group-append">
-                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+
                         </div>
                     </div>
                 </div>
@@ -25,7 +25,7 @@
 
             <!-- /.card-header -->
             <div class="card-body table-responsive p-0">
-            <table class="table table-hover  text-center" id="table">
+            <table class="table table-hover " id="table">
                 <tr>
                 <th>Index</th>
                 <th>Title</th>
@@ -35,24 +35,20 @@
                 <th>Action</th>
                 </tr>
                 @foreach ($products as $item)
-                <tr id="myList">
+                <tr>
                     <td>{{ $loop->index+1 }}</td>
                     <td>{{ $item->name }}</td>
                     <td>{{ $item->price }}</td>
-                    <td>{{ $item->category_id }}</td>
+                    <td>{{ $item->category_id ? $item->category->name :'' }}</td>
                     <td>
-                        @if($item->status==1)
-                        <span class="btn btn-sm btn-success btn-rounded">Active</span>
+                        @if($item->status==0)
+                        <span> <a class="badge badge-danger" href="{{ url('admin/product/status/'.$item->id) }}">In-active</a> </span>
                         @else
-                        <span class="btn btn-sm btn-danger btn-rounded">InActive</span>
+                        <span> <a class="badge badge-success" href="{{ url('admin/product/status/'.$item->id) }}">Active</a> </span>
                         @endif
                     </td>
-                    <td class="form-inline">
-                        @if($item->status==0)
-                        <span> <a class="btn btn-sm btn-success btn-rounded" href="{{ url('admin/product/status/'.$item->id) }}">Active</a> </span>
-                        @else
-                        <span> <a class="btn btn-sm btn-danger btn-rounded" href="{{ url('admin/product/status/'.$item->id) }}">InActive</a> </span>
-                        @endif
+                    <td class="form-inline text-center" style="text-center">
+
                         <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#exampleModal{{ $item->id }}">
                             <i class="fas fa-eye"></i>
                         </button>

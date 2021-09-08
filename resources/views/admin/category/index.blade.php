@@ -45,6 +45,7 @@
                         @endif
                     </td>
                     <td>
+                        
                         <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#exampleModal{{ $item->id }}">
                             <i class="fas fa-eye"></i>
                         </button>

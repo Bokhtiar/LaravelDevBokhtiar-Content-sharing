@@ -32,5 +32,9 @@ class Product extends Model
         'menu15',
     ];
 
+    public function category(){
+        return $this->belongsTo(Category::class);
+    }
+
 
 }

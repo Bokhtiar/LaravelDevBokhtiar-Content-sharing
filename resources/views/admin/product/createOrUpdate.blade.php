@@ -15,7 +15,7 @@
             <h2 class="card-title">{{@$product ? 'Update Product Form' : 'Create New Product Form'}} </h2>
                 <div class="card-tools">
                     <div class="form-inline input-group input-group-sm" style="width: 100px;">
-                        <a class="btn btn-primary" href="">All Product</a>
+                        <a class="btn btn-primary" href="{{ url('admin/product') }}">All Product</a>
                     </div>
                 </div>
             </div>
