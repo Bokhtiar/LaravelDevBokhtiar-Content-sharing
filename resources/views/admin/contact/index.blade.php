@@ -1,6 +1,8 @@
 @extends('layouts.admin.app')
 @section('admin_content')
 
+@section('title', 'List Of Contact')
+
 @section('css')
 @endsection
 
@@ -24,7 +26,7 @@
 
             <!-- /.card-header -->
             <div class="card-body table-responsive p-0">
-            <table class="table table-hover  text-center" id="table">
+            <table class="table table-hover" id="table">
                 <tr>
                 <th>Index</th>
                 <th>Name</th>
@@ -38,23 +40,16 @@
                     <td>{{ $item->name }}</td>
                     <td>{{ $item->email }}</td>
                     <td>
-                        @if($item->status==1)
-                        <span class="btn btn-sm btn-success btn-rounded">Active</span>
+                        @if($item->status==0)
+                        <span> <a class="badge badge-danger" href="{{ url('admin/contact/status/'.$item->id) }}">InActive</a> </span>
                         @else
-                        <span class="btn btn-sm btn-danger btn-rounded">InActive</span>
+                        <span> <a class="badge badge-success" href="{{ url('admin/contact/status/'.$item->id) }}">Active</a> </span>
                         @endif
                     </td>
-                    <td class="form-inline float-right">
-                        @if($item->status==0)
-                        <span> <a class="btn btn-sm btn-success btn-rounded" href="{{ url('admin/contact/status/'.$item->id) }}">Active</a> </span>
-                        @else
-                        <span> <a class="btn btn-sm btn-danger btn-rounded" href="{{ url('admin/contact/status/'.$item->id) }}">InActive</a> </span>
-                        @endif
+                    <td>
                         <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#exampleModal{{ $item->id }}">
                             <i class="fas fa-eye"></i>
                         </button>
-
-
                         <form action="{{ url('admin/contact', $item->id ) }}" method="POST">
                             @csrf
                             @method('DELETE')

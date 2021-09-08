@@ -1,6 +1,8 @@
 @extends('layouts.admin.app')
 @section('admin_content')
 
+@section('title', 'List Of Product')
+
 @section('css')
 @endsection
 
@@ -125,29 +127,9 @@
         </div>
     </div><!-- /.row -->
 </section>
+@endsection
 
 @section('js')
-<script>
-    $(document).ready(function(){
-        $("#search_key").on("keyup", function() {
-           $value = $(this).val()
-           if($value){
-               $.ajax({
-                   url:'/admin/category/search/' + $value,
-                   type:'GET',
-                   dataType:"json",
-
-                   success:function(data){
-                       data.forEach(item => {
-                        $('#table').append('<tr> <td>'+ item.id +'</td> <td>'+ item.name +'</td> <td> '+ item.color +' </td> <td> <a class="btn btn-sm btn-info" href=""><i class="fas fa-eye"></i></a> <a class="btn btn-sm btn-success" href=""><i class="fas fa-user-edit"></i></a><a class="btn btn-sm btn-danger" href=""><i class="fas fa-trash"></i></a>  </td> </tr>')
-                       });
-                   }
-               })
-           }
-        });
-    });
-</script>
-
 @endsection
 
-@endsection
+

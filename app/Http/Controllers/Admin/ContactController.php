@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
 use Illuminate\Http\Request;
+use Session;
 
 class ContactController extends Controller
 {
@@ -18,12 +19,14 @@ class ContactController extends Controller
     {
         $contact = Contact::find($id);
         Contact::query()->Status($contact);
+        Session::flash('Active','Status Update Successfully...');
         return back();
     }
 
     public function destroy($id)
     {
         Contact::find($id)->delete();
+        Session::flash('delete','delete Sucessfully...');
         return back();
     }
 }

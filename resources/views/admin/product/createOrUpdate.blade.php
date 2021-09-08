@@ -1,6 +1,8 @@
 @extends('layouts.admin.app')
 @section('admin_content')
 
+@section('title', 'Product Create')
+
 @section('css')
 <link rel="stylesheet" href="{{ asset('admin') }}/plugins/select2/select2.min.css">
 @endsection
@@ -147,7 +149,7 @@
         </div>
     </div><!-- /.row -->
 </section>
-
+@endsection
 @section('js')
 <!-- Select2 -->
 <script src="{{ asset('admin') }}/plugins/select2/select2.full.min.js"></script>
@@ -160,4 +162,4 @@
 
 @endsection
 
-@endsection
+
