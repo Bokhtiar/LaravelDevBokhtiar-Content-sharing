@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\TopHeaders;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Session;
 
 class TopHeaderController extends Controller
 {
@@ -36,6 +37,7 @@ class TopHeaderController extends Controller
                 ]);
                 if (!empty($category)) {
                     DB::commit();
+                    Session::flash('update','Updated Sucessfully...');
                     return redirect('admin/topheader/create');
                 }
                 throw new \Exception('Invalid Top Header Information');

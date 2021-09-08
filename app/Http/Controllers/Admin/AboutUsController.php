@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\About;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Session;
 
 class AboutUsController extends Controller
 {
@@ -32,6 +33,7 @@ class AboutUsController extends Controller
                 ]);
                 if (!empty($aboutU)) {
                     DB::commit();
+                    Session::flash('update','Updated Sucessfully...');
                     return redirect('admin/about/create');
                 }
                 throw new \Exception('Invalid About Information');
