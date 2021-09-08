@@ -87,7 +87,7 @@
 
 @if(Session::has('delete'))
   <script type="text/javascript">
-    swal("delete Successfully","delete secessfully","success")
+    swal("Delete Successfully","Delete Secessfully","success")
   </script>
 @endif
 
@@ -99,7 +99,7 @@
 
 @if(Session::has('Active'))
   <script type="text/javascript">
-    swal("Complate","Complate Successfully","success")
+    swal("Complate","Status Update Successfully","success")
   </script>
 @endif
 

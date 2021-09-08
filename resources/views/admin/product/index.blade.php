@@ -47,7 +47,7 @@
                         <span class="btn btn-sm btn-danger btn-rounded">InActive</span>
                         @endif
                     </td>
-                    <td class=" ">
+                    <td class="form-inline">
                         @if($item->status==0)
                         <span> <a class="btn btn-sm btn-success btn-rounded" href="{{ url('admin/product/status/'.$item->id) }}">Active</a> </span>
                         @else
@@ -119,16 +119,7 @@
                 @endforeach
 
             </table>
-                <!-- /.card-body -->
-                <div class="card-footer clearfix">
-                    <ul class="pagination pagination-sm m-0 float-right">
-                    <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-                    </ul>
-                </div>
+
                 </div>
                 <!-- /.card -->
             </div>

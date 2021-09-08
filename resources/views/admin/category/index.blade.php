@@ -1,6 +1,7 @@
 @extends('layouts.admin.app')
 @section('admin_content')
 
+@section('title', 'Category List')
 @section('css')
 @endsection
 
@@ -13,10 +14,9 @@
             <div class="card-header">
             <h2 class="card-title">LIST OF CATEGORY </h2>
                 <div class="card-tools">
-                    <div class="form-inline input-group input-group-sm" style="width: 180px;">
-                        <input type="text" id="search_key" name="search_key" class="form-control float-right" placeholder="Search">
+                    <div class="form-inline input-group input-group-sm" style="width: 115px;">
                         <div class="input-group-append">
-                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                            <a class="btn btn-primary" href="">Create Category</a>
                         </div>
                     </div>
                 </div>
@@ -33,32 +33,27 @@
                 <th>Action</th>
                 </tr>
                 @foreach ($categories as $item)
-                <tr id="myList">
+                <tr>
                     <td>{{ $loop->index+1 }}</td>
                     <td>{{ $item->name }}</td>
                     <td>{{ $item->color }}</td>
                     <td>
-                        @if($item->status==1)
-                        <span class="btn btn-sm btn-success btn-rounded">Active</span>
+                        @if($item->status==0)
+                        <span> <a class="badge badge-success" href="{{ url('admin/category/status/'.$item->id) }}">Active</a> </span>
                         @else
-                        <span class="btn btn-sm btn-danger btn-rounded">InActive</span>
+                        <span> <a class="badge badge-danger" href="{{ url('admin/category/status/'.$item->id) }}">InActive</a> </span>
                         @endif
                     </td>
-                    <td class="form-inline float-right">
-                        @if($item->status==0)
-                        <span> <a class="btn btn-sm btn-success btn-rounded" href="{{ url('admin/category/status/'.$item->id) }}">Active</a> </span>
-                        @else
-                        <span> <a class="btn btn-sm btn-danger btn-rounded" href="{{ url('admin/category/status/'.$item->id) }}">InActive</a> </span>
-                        @endif
+                    <td>
                         <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#exampleModal{{ $item->id }}">
                             <i class="fas fa-eye"></i>
                         </button>
                         <a class="btn btn-sm btn-success" href="{{ url('admin/category/'.$item->id.'/edit') }}"><i class="fas fa-user-edit"></i></a>
 
-                        <form action="{{ url('admin/category', $item->id ) }}" method="POST">
+                        <form  action="{{ url('admin/category', $item->id ) }}" method="POST" >
                             @csrf
                             @method('DELETE')
-                            <button class="btn btn-sm btn-danger" type="submit"><i class="fas fa-trash"></i></button>
+                            <button  class="btn btn-sm btn-danger" type="submit" ><i class="fas fa-trash"></i></button>
                         </form>
                     </td>
                 </tr>
@@ -84,18 +79,7 @@
                     </div>
                 <!--modal end here-->
                 @endforeach
-
             </table>
-                <!-- /.card-body -->
-                <div class="card-footer clearfix">
-                    <ul class="pagination pagination-sm m-0 float-right">
-                    <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-                    </ul>
-                </div>
                 </div>
                 <!-- /.card -->
             </div>
@@ -105,29 +89,7 @@
         </div>
     </div><!-- /.row -->
 </section>
-
+@endsection
 @section('js')
-<script>
-    $(document).ready(function(){
-        $("#search_key").on("keyup", function() {
-           $value = $(this).val()
-           if($value){
-               $.ajax({
-                   url:'/admin/category/search/' + $value,
-                   type:'GET',
-                   dataType:"json",
-
-                   success:function(data){
-                       data.forEach(item => {
-                        $('#table').append('<tr> <td>'+ item.id +'</td> <td>'+ item.name +'</td> <td> '+ item.color +' </td> <td> <a class="btn btn-sm btn-info" href=""><i class="fas fa-eye"></i></a> <a class="btn btn-sm btn-success" href=""><i class="fas fa-user-edit"></i></a><a class="btn btn-sm btn-danger" href=""><i class="fas fa-trash"></i></a>  </td> </tr>')
-                       });
-                   }
-               })
-           }
-        });
-    });
-</script>
-
 @endsection
 
-@endsection

@@ -61,6 +61,7 @@ class ProductController extends Controller
                 ]);
                 if (!empty($product)) {
                     DB::commit();
+                    Session::flash('insert','Added Sucessfully...');
                     return redirect('admin/product/');
                 }
                 throw new \Exception('Invalid Product Information');
@@ -135,6 +136,7 @@ class ProductController extends Controller
                 ]);
                 if (!empty($product)) {
                     DB::commit();
+                    Session::flash('update','Updated Sucessfully...');
                     return redirect('admin/product/');
                 }
                 throw new \Exception('Invalid Product Information');
@@ -153,6 +155,7 @@ class ProductController extends Controller
     public function destroy($id)
     {
         Product::find($id)->delete();
+        Session::flash('delete','delete Sucessfully...');
         return back();
     }
 
@@ -160,6 +163,7 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         Category::query()->Status($product);
+        Session::flash('Active','Status Update Successfully...');
         return back();
     }
 

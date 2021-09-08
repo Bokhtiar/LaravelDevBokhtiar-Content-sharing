@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -11,7 +12,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::index(['id', 'name', 'color', 'description']);
+        $categories = Category::get(['id', 'name', 'color', 'description']);
         return view('admin.category.index',compact('categories'));
     }
 
@@ -37,6 +38,7 @@ class CategoryController extends Controller
                 ]);
                 if (!empty($category)) {
                     DB::commit();
+                    Session::flash('insert','Added Sucessfully...');
                     return redirect('admin/category/');
                 }
                 throw new \Exception('Invalid Category Information');
@@ -70,6 +72,7 @@ class CategoryController extends Controller
                 ]);
                 if (!empty($category)) {
                     DB::commit();
+                    Session::flash('update','Updated Sucessfully...');
                     return redirect('admin/category/');
                 }
                 throw new \Exception('Invalid Category Information');
@@ -82,6 +85,7 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         Category::find($id)->delete();
+        Session::flash('delete','delete Sucessfully...');
         return back();
     }
 
@@ -95,6 +99,7 @@ class CategoryController extends Controller
     {
         $cat = Category::find($id);
         Category::query()->Status($cat);
+        Session::flash('Active','Status Update Successfully...');
         return back();
     }
 }
