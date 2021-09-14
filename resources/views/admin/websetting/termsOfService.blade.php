@@ -1,30 +1,29 @@
 @extends('layouts.admin.app')
 @section('admin_content')
-    @section('title','about')
+@section('title','terms of service')
     @section('css')
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="{{ asset('admin') }}/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
     @endsection
-
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="card">
                     <div class="card-header">
-                      About Us Create Update
+                      Terms Of Service Create_Update
                     </div>
                     <div class="card-body">
-                      <form class="form-control" method="POST" action="{{ url('admin/about/'.$topheader->id) }}">
+                      <form class="form-control" method="POST" action="{{ url('admin/terms/'.$terms->id) }}">
                         @method('PUT')
                         @csrf
                         <div class="form-group">
-                            <label for="">About Title</label>
-                            <input type="text" name="title" value="{{ @$about->title }}" class="form-control" id="">
+                            <label for="">Terms Of Service Title</label>
+                            <input type="text" name="title" value="{{ @$terms->title }}" class="form-control" id="">
                         </div>
 
                         <div class="form-group">
                             <div class="card">
                                 <div class="card-header">
-                                    <h5 class="mb-0 h6">About Descriptions</h5>
+                                    <h5 class="mb-0 h6">Terms Of Service Descriptions</h5>
                                 </div>
                                 <div class="card-body">
 
@@ -45,7 +44,7 @@
                                     <div class="card-body pad">
                                         <div class="mb-3">
                                             <textarea class="textarea" name="description" placeholder="Place some text here"
-                                                style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{!!  @$about->description  !!}</textarea>
+                                                style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{!!  @$terms->description  !!}</textarea>
                                         </div>
                                     </div>
                                 </div>

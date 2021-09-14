@@ -1,26 +1,51 @@
 @extends('layouts.admin.app')
 @section('admin_content')
-    @section('title','about')
+
+@section('title', 'Create New Blog')
     @section('css')
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="{{ asset('admin') }}/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
     @endsection
-
         <div class="row justify-content-center">
-            <div class="col-md-10">
+            <div class="col-md-12">
+                @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
                 <div class="card">
                     <div class="card-header">
-                      About Us Create Update
-                    </div>
+                        <h2 class="card-title"> {{ isset($blog) ? "Update Blog " : "Create Blog Form" }}  </h2>
+                            <div class="card-tools">
+                                <div class="form-inline input-group input-group-sm" style="width: 110px;">
+                                    <a class="btn btn-primary" href="{{ url('admin/blog') }}">List Of Blog</a>
+                                    <div class="input-group-append">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     <div class="card-body">
-                      <form class="form-control" method="POST" action="{{ url('admin/about/'.$topheader->id) }}">
+                    @if (!empty($blog))
+                    <form class="form-control" method="POST" action="{{ url('admin/blog',$blog->id) }}">
                         @method('PUT')
+                    @else
+                    <form class="form-control" method="POST" action="{{ url('admin/blog') }}">
+                    @endif
+
                         @csrf
                         <div class="form-group">
-                            <label for="">About Title</label>
-                            <input type="text" name="title" value="{{ @$about->title }}" class="form-control" id="">
+                            <label for="">Blog Title</label>
+                            <input type="text" name="name" value="{{ @$blog->name }}" placeholder="enter blog title" class="form-control" id="">
                         </div>
-
+                        <div class="form-group">
+                            <label for="">Blog Short Description</label>
+                            <textarea name="short_description" id="" placeholder="blog short description" class="form-control" cols="10" rows="4">{{ @$blog->short_description }}</textarea>
+                        </div>
                         <div class="form-group">
                             <div class="card">
                                 <div class="card-header">
@@ -45,7 +70,7 @@
                                     <div class="card-body pad">
                                         <div class="mb-3">
                                             <textarea class="textarea" name="description" placeholder="Place some text here"
-                                                style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{!!  @$about->description  !!}</textarea>
+                                                style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{!!  @$blog->description  !!}</textarea>
                                         </div>
                                     </div>
                                 </div>

@@ -33,6 +33,7 @@
   Email: Bokhtiartoshar1@gmail.com
   Company Name: BrsSoftTech@gmail.com>
   -->
+  @yield('css')
 </head>
 
 <body id="home">
@@ -131,7 +132,7 @@
                   </div>
 
                   <div class="row portfolio-container">
-                    @foreach (App\Models\Product::all() as $item)
+                    @foreach (App\Models\Product::query()->Active()->get() as $item)
                     <div class="col-lg-4 col-md-6 portfolio-item {{$item->category_id}}">
                       <div class="box featured">
                         <h3>{{ $item->name }}</h3>
@@ -151,7 +152,7 @@
                           <li>{{ $item->menu12 }}</li>
                         </ul>
                         <div class="btn-wrap">
-                          <a href="#" class="btn-buy">Buy Now</a>
+                          <a href="{{ url('user/add-to-cart/store/'.$item->id) }}" class="btn-buy">Buy Now</a>
                         </div>
                       </div>
                       </div>
@@ -267,6 +268,56 @@
 
   <!-- Template Main JS File -->
   <script src="{{ asset('user') }}/assets/js/main.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js" charset="utf-8"></script>
+
+@if(Session::has('insert'))
+  <script type="text/javascript">
+    swal("Add To Cart","Added Sucessfully...","success")
+  </script>
+@endif
+
+
+@if(Session::has('update'))
+  <script type="text/javascript">
+    swal("Updated Data","Update Sucessfully...","success")
+  </script>
+@endif
+
+@if(Session::has('delete'))
+  <script type="text/javascript">
+    swal("Delete Successfully","Delete Secessfully","success")
+  </script>
+@endif
+
+@if(Session::has('order'))
+  <script type="text/javascript">
+    swal("Order Successfully","Order Secessfully","success")
+  </script>
+@endif
+
+
+
+
+@if(Session::has('reset_password'))
+  <script type="text/javascript">
+    swal("Enter your valid Password","Dont matched the password plz inter your valid password...","success")
+  </script>
+@endif
+
+<script type="text/javascript">
+
+$(document).on("click","#delete",function(e){
+e.preventDefault();
+var link=$(this).attr("href");
+bootbox.confirm("are you want to delete",function(confirmed){
+  if(confirmed){
+    window.location.href=link;
+};
+});
+});
+</script>
 </body>
 
 </html>

@@ -79,6 +79,24 @@
 
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
+              <i class="nav-icon fa fa-pie-chart"></i>
+              <p>
+                Blogs
+                <i class="right fa fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ url('admin/blog') }}" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>Blog List</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
               <i class="nav-icon fa fa-tree"></i>
               <p>
                 Orders
@@ -87,7 +105,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ url('admin/order/index') }}" class="nav-link">
+                <a href="{{ url('admin/orders') }}" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>All Order</p>
                 </a>
@@ -149,6 +167,18 @@
                 <a href="{{ url('admin/about/create') }}" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>About-Us</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url('admin/terms/create') }}" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>Terms Of Service</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url('admin/privacy/create') }}" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>Privacy Policy</p>
                 </a>
               </li>
             </ul>

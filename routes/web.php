@@ -1,10 +1,13 @@
 <?php
 
 use App\Http\Controllers\Admin\AboutUsController;
+use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\PrivacyController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Admin\TermsOfServiceController;
 use App\Http\Controllers\Admin\TopHeaderController;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
@@ -18,16 +21,22 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/blog', function () {
-    return view('home');
-});
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('contact/store', [App\Http\Controllers\User\ContactController::class, 'store']);
+Route::get('/blog', [App\Http\Controllers\User\BlogController::class, 'index']);
+Route::get('/blog/detail/{text}', [App\Http\Controllers\User\BlogController::class, 'show']);
+Route::post('/blog-search', [App\Http\Controllers\User\BlogController::class, 'search']);
+Route::get('/logout', [App\Http\Controllers\User\UserDashboardController::class, 'logout']);
+
+
 
 Route::group([ "as"=>'user.' , "prefix"=>'user' , "namespace"=>'User' , "middleware"=>['auth','user']],function(){
     Route::get('/dashboard', [App\Http\Controllers\User\UserDashboardController::class, 'index'])->name('dashboard');
+    Route::get('/add-to-cart/store/{id}', [App\Http\Controllers\User\CartController::class, 'store']);
+    Route::get('/checkout', [App\Http\Controllers\User\CheckoutController::class, 'create']);
+    Route::post('/order/store', [App\Http\Controllers\User\OrderController::class, 'store']);
 });
 
 
@@ -53,5 +62,20 @@ Route::group([ "as"=>'admin.' , "prefix"=>'admin' , "middleware"=>['auth','admin
     //contact
     Route::resource('contact', ContactController::class);
     Route::get('/contact/status/{id}', [App\Http\Controllers\Admin\ContactController::class, 'status']);
+    //slider
+    Route::resource('blog', BlogController::class);
+    Route::get('/blog/status/{id}', [BlogController::class, 'status']);
+    //logout
+    Route::get('/logout', [App\Http\Controllers\Admin\AdminDashboardController::class, 'logout']);
+    //order
+    Route::get('/orders', [App\Http\Controllers\Admin\OrderController::class, 'index']);
+    Route::get('/order/detail/{id}', [App\Http\Controllers\Admin\OrderController::class, 'show']);
+    Route::get('/order/status/{id}', [App\Http\Controllers\Admin\OrderController::class, 'status']);
+    //terms of service
+    Route::resource('terms', TermsOfServiceController::class);
+    //privacy
+    Route::resource('privacy', PrivacyController::class);
 
 });
+
+

@@ -51,7 +51,7 @@
 
               <div class="info-box-content">
                 <span class="info-box-text">Orders</span>
-                <span class="info-box-number">2,000</span>
+                <span class="info-box-number">{{ $order_number }}</span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -101,68 +101,29 @@
                     <thead>
                     <tr>
                       <th>Order ID</th>
-                      <th>Item</th>
+                      <th>Name</th>
                       <th>Status</th>
-                      <th>Popularity</th>
+                      <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
+                    @foreach ($orders as $item)
                     <tr>
-                      <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                      <td>Call of Duty IV</td>
-                      <td><span class="badge badge-success">Shipped</span></td>
-                      <td>
-                        <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                      <td>Samsung Smart TV</td>
-                      <td><span class="badge badge-warning">Pending</span></td>
-                      <td>
-                        <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                      <td>iPhone 6 Plus</td>
-                      <td><span class="badge badge-danger">Delivered</span></td>
-                      <td>
-                        <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                      <td>Samsung Smart TV</td>
-                      <td><span class="badge badge-info">Processing</span></td>
-                      <td>
-                        <div class="sparkbar" data-color="#00c0ef" data-height="20">90,80,-90,70,-61,83,63</div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                      <td>Samsung Smart TV</td>
-                      <td><span class="badge badge-warning">Pending</span></td>
-                      <td>
-                        <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                      <td>iPhone 6 Plus</td>
-                      <td><span class="badge badge-danger">Delivered</span></td>
-                      <td>
-                        <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                      <td>Call of Duty IV</td>
-                      <td><span class="badge badge-success">Shipped</span></td>
-                      <td>
-                        <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
-                      </td>
-                    </tr>
+                        <td>#{{$item->id}}</td>
+                        <td>{{ $item->f_name .' '. $item->l_name }}</td>
+                        <td>
+                            @if ($item->status==1)
+                            <span class="badge badge-success">Success </span>
+                            @else
+                            <span class="badge badge-danger"> Pending </span>
+                            @endif
+
+                        </td>
+                        <td>
+                          <a href="{{ url('admin/order/detail/'.$item->id) }}" class="btn btn-sm btn-info">View</a>
+                        </td>
+                      </tr>
+                    @endforeach
                     </tbody>
                   </table>
                 </div>
@@ -170,8 +131,7 @@
               </div>
               <!-- /.card-body -->
               <div class="card-footer clearfix">
-                <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place New Order</a>
-                <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">View All Orders</a>
+                <a href="{{ url('admin/orders') }}" class="btn btn-sm btn-secondary float-right">View All Orders</a>
               </div>
               <!-- /.card-footer -->
             </div>

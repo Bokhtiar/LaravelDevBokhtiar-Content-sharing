@@ -3,17 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\About;
+use App\Models\Privacy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
 
-class AboutUsController extends Controller
+class PrivacyController extends Controller
 {
     public function create()
     {
-        $about = About::find(1);
-        return view('admin.websetting.about_create',compact('about'));
+        $privacy = Privacy::find(1);
+        return view('admin.websetting.privacy_create',compact('privacy'));
     }
 
     public function update(Request $request, $id)
@@ -25,16 +25,16 @@ class AboutUsController extends Controller
 
         if($validated){
             try{
-                $about = About::find($id);
+                $privacy = Privacy::find($id);
                 DB::beginTransaction();
-                $aboutU = $about->update([
+                $privacyU = $privacy->update([
                     'title' => $request->title,
                     'description' => $request->description,
                 ]);
-                if (!empty($aboutU)) {
+                if (!empty($privacyU)) {
                     DB::commit();
                     Session::flash('update','Updated Sucessfully...');
-                    return redirect('admin/about/create');
+                    return redirect('admin/privacy/create');
                 }
                 throw new \Exception('Invalid About Information');
             }catch(\Exception $ex){
@@ -42,5 +42,4 @@ class AboutUsController extends Controller
             }
         }
     }
-
 }

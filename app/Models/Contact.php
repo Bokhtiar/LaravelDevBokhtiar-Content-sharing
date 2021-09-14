@@ -12,7 +12,7 @@ class Contact extends Model
     use CrudTrait;
 
     protected $fillable = [
-        'name', 'email', 'subject', 'message', 'status'
+        'name', 'email', 'subject', 'message', 'status','ip',
     ];
 
     public function scopeMessage()
@@ -23,6 +23,6 @@ class Contact extends Model
 
     public function scopeMessageShow()
     {
-        return self::latest()->where('status',0)->take(3)->get();
+        return self::latest()->where('status',0)->take(5)->get();
     }
 }

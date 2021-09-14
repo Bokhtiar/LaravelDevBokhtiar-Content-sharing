@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Blog - Anyar Bootstrap Template</title>
+  <title>Google | @yield('page_title')</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -29,12 +29,7 @@
   <!-- Template Main CSS File -->
   <link href="{{ asset('user') }}/assets/css/style.css" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: Anyar - v2.2.1
-  * Template URL: https://bootstrapmade.com/anyar-free-multipurpose-one-page-bootstrap-theme/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+  @yield('css')
 </head>
 
 <body>
@@ -64,7 +59,5 @@
 
   <!-- Template Main JS File -->
   <script src="{{ asset('user') }}/assets/js/main.js"></script>
-
 </body>
-
 </html>

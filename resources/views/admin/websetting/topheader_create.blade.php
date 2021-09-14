@@ -1,9 +1,9 @@
 @extends('layouts.admin.app')
 @section('admin_content')
-
+@section('title','top header ')
     @section('css')
     @endsection
-    
+
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">

@@ -18,6 +18,7 @@ class CreateTopHeadersTable extends Migration
             $table->string('email');
             $table->string('phone');
             $table->string('time');
+            $table->string('website_name');
             $table->timestamps();
         });
     }

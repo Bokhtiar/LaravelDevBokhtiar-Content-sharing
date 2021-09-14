@@ -25,6 +25,7 @@ class ContactController extends Controller
                     'email' => $request->email,
                     'subject' => $request->subject,
                     'message' => $request->message,
+                    'ip' => request()->ip(),
                     'status'=> 0,
                 ]);
                 if (!empty($contactU)) {

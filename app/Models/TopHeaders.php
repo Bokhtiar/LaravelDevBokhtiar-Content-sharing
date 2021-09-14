@@ -10,10 +10,11 @@ class TopHeaders extends Model
 {
     use HasFactory;
     use CrudTrait;
-    
+
     protected $fillable = [
         'email',
         'phone',
         'time',
+    'website_name',
     ];
 }

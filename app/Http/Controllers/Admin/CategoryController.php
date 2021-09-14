@@ -12,7 +12,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::get(['id', 'name', 'color', 'description']);
+        $categories = Category::get(['id', 'name', 'color', 'description','status']);
         return view('admin.category.index',compact('categories'));
     }
 

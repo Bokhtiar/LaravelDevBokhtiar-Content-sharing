@@ -1,205 +1,394 @@
 @extends('layouts.user.app')
 @section('user_content')
-
-<!-- ======= Blog Section ======= -->
-<section id="blog" class="blog">
-    <div class="container">
-
-      <div class="row">
-
-        <div class="col-lg-4  col-md-6 d-flex align-items-stretch" data-aos="fade-up">
-          <article class="entry">
-
-            <div class="entry-img">
-              <img src="assets/img/blog-1.jpg" alt="" class="img-fluid">
-            </div>
-
-            <h2 class="entry-title">
-              <a href="blog-single.html">Dolorum optio tempore voluptas dignissimos cumque fuga qui quibusdam quia</a>
-            </h2>
-
-            <div class="entry-meta">
-              <ul>
-                <li class="d-flex align-items-center"><i class="icofont-user"></i> <a href="blog-single.html">John Doe</a></li>
-                <li class="d-flex align-items-center"><i class="icofont-wall-clock"></i> <a href="blog-single.html"><time datetime="2020-01-01">Jan 1, 2020</time></a></li>
-              </ul>
-            </div>
-
-            <div class="entry-content">
-              <p>
-                Similique neque nam consequuntur ad non maxime aliquam quas. Quibusdam animi praesentium. Aliquam et laboriosam eius aut nostrum quidem aliquid dicta zena prista maraeda talan mas indera.
-              </p>
-              <div class="read-more">
-                <a href="blog-single.html">Read More</a>
-              </div>
-            </div>
-
-          </article><!-- End blog entry -->
+@section('page_title', 'Dashboard')
+@section('css')
+<script src="https://kit.fontawesome.com/ba78558982.js" crossorigin="anonymous"></script>
+@endsection
+<main id="main">
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+        <div class="container">
+            <ol>
+                <li><a href="{{ url('/') }}">Home</a></li>
+                <li>Profile</li>
+            </ol>
         </div>
+    </section><!-- End Breadcrumbs -->
+    <section>
+        <style>
+            p {
+                margin: 0
+            }
 
-        <div class="col-lg-4  col-md-6 d-flex align-items-stretch" data-aos="fade-up">
-          <article class="entry">
 
-            <div class="entry-img">
-              <img src="assets/img/blog-2.jpg" alt="" class="img-fluid">
+            img {
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                object-fit: cover
+            }
+        </style>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="row">
+                        <div class="col-12 bg-white p-0 px-3 py-3 mb-3">
+                            <div class="d-flex flex-column align-items-center"> <img class="photo"
+                                    src="https://images.unsplash.com/photo-1541647376583-8934aaf3448a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+                                    alt="">
+                                <p class="fw-bold h4 mt-3">{{ Auth::user()->name}}</p>
+                                <p class="text-muted">Welcome to Our Website</p>
+                                <div class="d-flex ">
+                                    <div class="btn btn-outline-primary message"><a
+                                            href="http://localhost:8000/#contact" class="text-dark">Admin Message</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 bg-white p-0 px-2 pb-3 mb-3">
+                            <div class="d-flex justify-content-between border-bottom py-2 px-3">
+                                <p><span class="fas fa-globe me-2"></span>Order item</p> <a
+                                    class="text-light btn btn-sm btn-primary" href="#order">GO...</a>
+                            </div>
+                            <div class="d-flex justify-content-between border-bottom py-2 px-3">
+                                <p><span class="fas fa-globe me-2"></span>Cart item</p> <a
+                                    class="text-light btn btn-sm btn-primary" href="#cart">GO...</a>
+                            </div>
+                            <div class="d-flex justify-content-between border-bottom py-2 px-3">
+                                <p><span class="fab fa-github-alt me-2"></span>Message</p> <a
+                                    class="text-light btn btn-sm btn-primary" href="#message">GO...</a>
+                            </div>
+                            <div class="d-flex justify-content-between border-bottom py-2 px-3">
+                                <p><span class="fab fa-twitter me-2"></span>logout</p> <a class="text-light btn btn-sm btn-danger" href="{{ url('logout') }}">Logout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7 ps-md-4">
+                    <section id="order">
+                        <div class="card-header">
+                            <h2 class="card-title">Order Items </h2>
+                        </div>
+                        <div class="card-body table-responsive p-0">
+                            <table class="table table-hover  text-center" id="table">
+                                <tr>
+                                    <th>Index</th>
+                                    <th>Order Woner</th>
+                                    <th>Date</th>
+                                    <th>Action</th>
+                                </tr>
+                                @foreach ($orders as $order)
+                                <tr>
+                                    <td>{{ $loop->index+1 }}</td>
+                                    <td>{{ $order->f_name .' '. $order->l_name }}</td>
+                                    <td>{{ $order->created_at->diffForHumans() }}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-sm btn-info" data-toggle="modal"
+                                            data-target="#exampleModal{{ $order->id }}">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <a class="btn btn-sm btn-danger"
+                                            href="{{ url('admin/category/'.$order->id.'/edit') }}"><i
+                                                class="fas fa-trash"></i></a>
+                                    </td>
+                                </tr>
+
+                                <!--modal start here -->
+                                <div class="modal fade " id="exampleModal{{ $order->id }}" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <div class="modal-body">
+                                                    <section class="container">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <h4>User Info</h4>
+                                                                <hr>
+                                                                <p>
+                                                                    <strong>Name:</strong>{{$order->name}} <br>
+                                                                    <strong>Phone:</strong>{{$order->phone}} <br>
+                                                                    <strong>Email:</strong>{{$order->email}} <br>
+                                                                    <strong>Location:</strong>{{$order->location}} <br>
+                                                                </p>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <h4>Payment History</h4>
+                                                                <hr>
+                                                                <strong>Payment Type:</strong>{{$order->payment_name}}
+                                                                <br>
+                                                                <strong>Payment
+                                                                    Number:</strong>{{$order->payment_number}} <br>
+                                                                <strong>Payment
+                                                                    Secrect</strong>{{$order->payment_secret}} <br>
+                                                            </div>
+                                                            <div class="col-md-4">
+
+                                                                <h4>Details</h4>
+                                                                <hr>
+                                                                <strong>Comment:</strong>{{$order->description}} <br>
+                                                            </div>
+                                                        </div>
+                                                        <!--product details start here -->
+                                                        <section>
+                                                            <div class="row modal-body">
+                                                                @foreach(App\Models\Cart::where('order_id',$order->id)->get() as $cart)
+                                                                <div class="col-md-4 col-sm-12 col-lg-4">
+                                                                    <div class="text-center">
+                                                                        <div class="card">
+                                                                            <div class="card-header">
+                                                                                {{ $cart->product_id ?  $cart->product->name : '' }}
+                                                                            </div>
+                                                                            <div class="card-header">
+                                                                                {{ $cart->product_id ?  $cart->product->price : '' }}
+                                                                            </div>
+                                                                            <div class="card-body">
+                                                                                <span> {{ $cart->product_id ? $cart->product->menu1 :'' }}
+                                                                                </span><br>
+                                                                                <span> {{ $cart->product_id ? $cart->product->menu2 :'' }}
+                                                                                </span><br>
+                                                                                <span> {{ $cart->product_id ? $cart->product->menu3 :'' }}
+                                                                                </span><br>
+                                                                                <span> {{ $cart->product_id ? $cart->product->menu4 :'' }}
+                                                                                </span><br>
+                                                                                <span> {{ $cart->product_id ? $cart->product->menu5 :'' }}
+                                                                                </span><br>
+                                                                                <span> {{ $cart->product_id ? $cart->product->menu6 :'' }}
+                                                                                </span><br>
+                                                                                <span> {{ $cart->product_id ? $cart->product->menu7 :'' }}
+                                                                                </span><br>
+                                                                                <span> {{ $cart->product_id ? $cart->product->menu8 :'' }}
+                                                                                </span><br>
+                                                                                <span> {{ $cart->product_id ? $cart->product->menu9 :'' }}
+                                                                                </span><br>
+                                                                                <span> {{ $cart->product_id ? $cart->product->menu10 :'' }}
+                                                                                </span><br>
+                                                                                <span> {{ $cart->product_id ? $cart->product->menu11 :'' }}
+                                                                                </span><br>
+                                                                                <span> {{ $cart->product_id ? $cart->product->menu12 :'' }}
+                                                                                </span><br>
+                                                                                <span> {{ $cart->product_id ? $cart->product->menu13 :'' }}
+                                                                                </span><br>
+                                                                                <span> {{ $cart->product_id ? $cart->product->menu14 :'' }}
+                                                                                </span><br>
+                                                                                <span> {{ $cart->product_id ? $cart->product->menu15 :'' }}
+                                                                                </span><br>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                @endforeach
+                                                            </div>
+                                                            <section>
+                                                                @if ($order->status==0)
+                                                                <span>Order Status - Pending</span>
+                                                                @else
+                                                                <span>Order Status - Successfully</span>
+                                                                @endif
+                                                            </section>
+                                                        </section>
+                                                        <!--product detials show end here -->
+                                                    </section>
+                                                </div>
+                                                <!--end of modal body -->
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--modal end here-->
+                                    @endforeach
+                            </table>
+                        </div>
+                    </section>
+                    <!--end of cart -->
+
+
+
+                    <section id="cart">
+                        <div class="card-header">
+                            <h2 class="card-title">Cart Items </h2>
+                        </div>
+                        <div class="card-body table-responsive p-0">
+                            <table class="table table-hover  text-center" id="table">
+                                <tr>
+                                    <th>Index</th>
+                                    <th>Product Name</th>
+                                    <th>Quantity</th>
+                                    <th>Action</th>
+                                </tr>
+                                @foreach ($carts as $item)
+                                <tr>
+                                    <td>{{ $loop->index+1 }}</td>
+                                    <td>{{ $item->product->name }}</td>
+                                    <td>
+                                        <form action="" class="form-inline">
+                                            <input type="text" name="" class="form-control form-control-sm"
+                                                value="{{ $item->quantity }}" id="">
+                                            <input class="btn btn-sm btn-success" type="Submit" value="Submit" name=""
+                                                id="">
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-sm btn-info" data-toggle="modal"
+                                            data-target="#exampleModal{{ $item->id }}">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <a class="btn btn-sm btn-danger"
+                                            href="{{ url('admin/category/'.$item->id.'/edit') }}"><i
+                                                class="fas fa-trash"></i></a>
+                                    </td>
+                                </tr>
+
+                                <!--modal start here -->
+                                <div class="modal fade " id="exampleModal{{ $item->id }}" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">{{ $item->name }}</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row justify-content-center">
+                                                    <div class="col-sm-12 col-md-6 col-lg-6">
+                                                        <div class="text-center">
+                                                            <div class="card">
+                                                                <div class="card-header">
+                                                                    {{ $item->product->name }}
+                                                                </div>
+                                                                <div class="card-header">
+                                                                    {{ $item->product->price }}
+                                                                </div>
+                                                                <div class="card-body">
+                                                                    <span> {{ $item->product->menu1 }} </span><br>
+                                                                    <span> {{ $item->product->menu2 }} </span><br>
+                                                                    <span> {{ $item->product->menu3 }} </span><br>
+                                                                    <span> {{ $item->product->menu4 }} </span><br>
+                                                                    <span> {{ $item->product->menu5 }} </span><br>
+                                                                    <span> {{ $item->product->menu6 }} </span><br>
+                                                                    <span> {{ $item->product->menu7 }} </span><br>
+                                                                    <span> {{ $item->product->menu8 }} </span><br>
+                                                                    <span> {{ $item->product->menu9 }} </span><br>
+                                                                    <span> {{ $item->product->menu10 }} </span><br>
+                                                                    <span> {{ $item->product->menu11 }} </span><br>
+                                                                    <span> {{ $item->product->menu12 }} </span><br>
+                                                                    <span> {{ $item->product->menu13 }} </span><br>
+                                                                    <span> {{ $item->product->menu14 }} </span><br>
+                                                                    <span> {{ $item->product->menu15 }} </span><br>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                                <!--modal end here-->
+                                @endforeach
+                            </table>
+                            @if (!empty(App\Models\Cart::total_item_cart()))
+                            <div class="float-right">
+                                <a href="{{ url('user/checkout') }}" class="btn btn-primary btn-sm">Checkout</a>
+                            </div>
+                            @endif
+                        </div>
+                    </section>
+                    <!--end of cart -->
+
+                    <section id="message">
+                        <div class="card-header">
+                            <h2 class="card-title">Message List </h2>
+                        </div>
+                        <div class="card-body table-responsive p-0">
+                            <table class="table table-hover  text-center" id="table">
+                                <tr>
+                                    <th>Index</th>
+                                    <th>Name</th>
+                                    <th>E-mail</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                                @foreach ($contacts as $contact)
+                                <tr>
+                                    <td>{{ $loop->index+1 }}</td>
+                                    <td>{{ $contact->name }}</td>
+                                    <td>{{ $contact->email }}</td>
+                                    <td>
+                                        @if($contact->status==0)
+                                        <span class="badge badge-danger">NO Seen</span>
+                                        @else
+                                        <span class="badge badge-success"> Seen </span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-sm btn-info" data-toggle="modal"
+                                            data-target="#exampleModal-contact{{ $contact->id }}">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <a class="btn btn-sm btn-danger"
+                                            href="{{ url('admin/category/'.$contact->id.'/edit') }}"><i
+                                                class="fas fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                                <!--modal start here -->
+                                <div class="modal fade " id="exampleModal-contact{{ $contact->id }}" tabindex="-1"
+                                    role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">{{ $contact->name }}</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row justify-content-center">
+                                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                                        <div class="text-center">
+                                                            <div class="">
+                                                                <div class="card-header">
+                                                                    {{ $contact->Subject }}
+                                                                </div>
+                                                                <div class="card-body">
+                                                                    {{$contact->message}}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--modal end here message-->
+
+
+                                @endforeach
+                            </table>
+                        </div>
+                    </section>
+                </div>
             </div>
-
-            <h2 class="entry-title">
-              <a href="blog-single.html">Nisi magni odit consequatur autem nulla dolorem</a>
-            </h2>
-
-            <div class="entry-meta">
-              <ul>
-                <li class="d-flex align-items-center"><i class="icofont-user"></i> <a href="blog-single.html">John Doe</a></li>
-                <li class="d-flex align-items-center"><i class="icofont-wall-clock"></i> <a href="blog-single.html"><time datetime="2020-01-01">Jan 1, 2020</time></a></li>
-              </ul>
-            </div>
-
-            <div class="entry-content">
-              <p>
-                Ad impedit qui officiis est in non aliquid veniam laborum. Id ipsum qui aut. Sit aliquam et quia molestias laboriosam. Tempora nam odit omnis eum corrupti qui aliquid excepturi molestiae. Facilis et sint quos sed voluptas. Maxime sed tempore enim omnis non alias.
-              </p>
-              <div class="read-more">
-                <a href="blog-single.html">Read More</a>
-              </div>
-            </div>
-
-          </article><!-- End blog entry -->
         </div>
-
-        <div class="col-lg-4  col-md-6 d-flex align-items-stretch" data-aos="fade-up">
-          <article class="entry">
-
-            <div class="entry-img">
-              <img src="assets/img/blog-3.jpg" alt="" class="img-fluid">
-            </div>
-
-            <h2 class="entry-title">
-              <a href="blog-single.html">Possimus soluta ut id suscipit ea ut. In quo quia et soluta libero sit sint.</a>
-            </h2>
-
-            <div class="entry-meta">
-              <ul>
-                <li class="d-flex align-items-center"><i class="icofont-user"></i> <a href="blog-single.html">John Doe</a></li>
-                <li class="d-flex align-items-center"><i class="icofont-wall-clock"></i> <a href="blog-single.html"><time datetime="2020-01-01">Jan 1, 2020</time></a></li>
-              </ul>
-            </div>
-
-            <div class="entry-content">
-              <p>
-                Aut iste neque ut illum qui perspiciatis similique recusandae non. Fugit autem dolorem labore omnis et. Eum temporibus fugiat voluptate enim tenetur sunt omnis tara kero pakla metaruna nedore stan.
-              </p>
-              <div class="read-more">
-                <a href="blog-single.html">Read More</a>
-              </div>
-            </div>
-
-          </article><!-- End blog entry -->
-        </div>
-
-        <div class="col-lg-4  col-md-6 d-flex align-items-stretch" data-aos="fade-up">
-          <article class="entry">
-
-            <div class="entry-img">
-              <img src="assets/img/blog-4.jpg" alt="" class="img-fluid">
-            </div>
-
-            <h2 class="entry-title">
-              <a href="blog-single.html">Non rem rerum nam cum quo minus. Dolor distinctio deleniti explicabo eius exercitationem.</a>
-            </h2>
-
-            <div class="entry-meta">
-              <ul>
-                <li class="d-flex align-items-center"><i class="icofont-user"></i> <a href="blog-single.html">John Doe</a></li>
-                <li class="d-flex align-items-center"><i class="icofont-wall-clock"></i> <a href="blog-single.html"><time datetime="2020-01-01">Jan 1, 2020</time></a></li>
-              </ul>
-            </div>
-
-            <div class="entry-content">
-              <p>
-                Aspernatur rerum perferendis et sint. Voluptates cupiditate voluptas atque quae. Rem veritatis rerum enim et autem. Saepe atque cum eligendi eaque iste omnis a qui.
-              </p>
-              <div class="read-more">
-                <a href="blog-single.html">Read More</a>
-              </div>
-            </div>
-
-          </article><!-- End blog entry -->
-        </div>
-
-        <div class="col-lg-4  col-md-6 d-flex align-items-stretch" data-aos="fade-up">
-          <article class="entry">
-
-            <div class="entry-img">
-              <img src="assets/img/blog-5.jpg" alt="" class="img-fluid">
-            </div>
-
-            <h2 class="entry-title">
-              <a href="blog-single.html">Blanditiis dignissimos deleniti. Rerum iste et.</a>
-            </h2>
-
-            <div class="entry-meta">
-              <ul>
-                <li class="d-flex align-items-center"><i class="icofont-user"></i> <a href="blog-single.html">John Doe</a></li>
-                <li class="d-flex align-items-center"><i class="icofont-wall-clock"></i> <a href="blog-single.html"><time datetime="2020-01-01">Jan 1, 2020</time></a></li>
-              </ul>
-            </div>
-
-            <div class="entry-content">
-              <p>
-                Quidem et eum explicabo quia illo numquam nostrum corrupti provident. Quia aspernatur et et facere. Quisquam maiores natus nihil incidunt ipsum est optio eum maxime. Dignissimos vitae explicabo. Corrupti esse sed a a. Laborum optio reprehenderit quia dena per.
-              </p>
-              <div class="read-more">
-                <a href="blog-single.html">Read More</a>
-              </div>
-            </div>
-
-          </article><!-- End blog entry -->
-        </div>
-
-        <div class="col-lg-4  col-md-6 d-flex align-items-stretch" data-aos="fade-up">
-          <article class="entry">
-
-            <div class="entry-img">
-              <img src="assets/img/blog-6.jpg" alt="" class="img-fluid">
-            </div>
-
-            <h2 class="entry-title">
-              <a href="blog-single.html">Debitis cupiditate saepe ex quam aut id. Consequatur dignissimos et id id.</a>
-            </h2>
-
-            <div class="entry-meta">
-              <ul>
-                <li class="d-flex align-items-center"><i class="icofont-user"></i> <a href="blog-single.html">John Doe</a></li>
-                <li class="d-flex align-items-center"><i class="icofont-wall-clock"></i> <a href="blog-single.html"><time datetime="2020-01-01">Jan 1, 2020</time></a></li>
-              </ul>
-            </div>
-
-            <div class="entry-content">
-              <p>
-                Modi dolor et placeat ut iure ad. Qui perferendis fugit quo et cumque facilis et debitis rerum. Repellendus animi qui eos. Unde perferendis et tempora Ratione porro omnis magn delata sera marto ned.
-              </p>
-              <div class="read-more">
-                <a href="blog-single.html">Read More</a>
-              </div>
-            </div>
-
-          </article><!-- End blog entry -->
-        </div>
-
-      </div>
-
-      <div class="blog-pagination" data-aos="fade-up">
-        <ul class="justify-content-center">
-          <li class="disabled"><i class="icofont-rounded-left"></i></li>
-          <li><a href="#">1</a></li>
-          <li class="active"><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li><a href="#"><i class="icofont-rounded-right"></i></a></li>
-        </ul>
-      </div>
-
-    </div>
-  </section><!-- End Blog Section -->
+    </section>
+</main>
 
 @endsection
