@@ -20,19 +20,24 @@
                 <div class="card">
                         <span class="card-title text-center h4">Sub Category Form</span><hr>
                     <div class="card-body">
+                        @if (!empty($subcat))
+                        <form action="{{ url('admin/sub-category',$subcat->id) }}" method="post">
+                        @method('PUT')
+                        @else
                         <form action="{{ url('admin/sub-category') }}" method="POST">
                             @method('POST')
+                        @endif
                             @csrf
                             <div class="form-gorup">
                                 <label for="">Enter Sub Category Name <span class="text-danger">*</span></label>
-                                <input type="text" name="name" class="form-control" value="{{ @$item->name }}" placeholder="Enter Sub-Category Name" id="">
+                                <input type="text" name="name" class="form-control" value="{{ @$subcat->name }}" placeholder="Enter Sub-Category Name" id="">
                             </div>
                             <div class="form-group">
                                 <label for="">Select Category <span class="text-danger">*</span> </label>
                                 <select class="form-control select2" style="width: 100%;" name="categroy_id">
                                     <option selected="selected">--Select Category--</option>
                                     @foreach ($categories as $item)
-                                    <option value="{{ $item->id }}" {{ $item->id == @$product->category_id ? 'selected' : '' }}>{{ $item->name }} </option>
+                                    <option value="{{ $item->id }}" {{ $item->id == @$subcat->category_id ? 'selected' : '' }}>{{ $item->name }} </option>
                                      @endforeach
                                 </select>
                             </div>
@@ -50,7 +55,6 @@
                 <div class="card">
                     <p class="card-title">SubCategory List</p>
 
-
                     <div class="card-body table-responsive p-0">
                         <table class="table table-hover  text-center" id="table">
                             <tr>
@@ -66,20 +70,16 @@
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->category->name }}</td>
                                 <td>
-                                    @if($item->status==0)
-                                    <span> <a class="badge badge-success" href="{{ url('admin/category/status/'.$item->id) }}">Active</a> </span>
+                                    @if($item->status==1)
+                                    <span> <a class="badge badge-success" href="{{ url('admin/sub-category/status/'.$item->id) }}">Active</a> </span>
                                     @else
-                                    <span> <a class="badge badge-danger" href="{{ url('admin/category/status/'.$item->id) }}">InActive</a> </span>
+                                    <span> <a class="badge badge-danger" href="{{ url('admin/sub-category/status/'.$item->id) }}">InActive</a> </span>
                                     @endif
                                 </td>
                                 <td>
+                                    <a class="btn btn-sm btn-success" href="{{ url('admin/sub-category/'.$item->id.'/edit') }}"><i class="fas fa-user-edit"></i></a>
 
-                                    <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#exampleModal{{ $item->id }}">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                    <a class="btn btn-sm btn-success" href="{{ url('admin/category/'.$item->id.'/edit') }}"><i class="fas fa-user-edit"></i></a>
-
-                                    <form  action="{{ url('admin/category', $item->id ) }}" method="POST" >
+                                    <form  action="{{ url('admin/sub-category', $item->id ) }}" method="POST" >
                                         @csrf
                                         @method('DELETE')
                                         <button  class="btn btn-sm btn-danger" type="submit" ><i class="fas fa-trash"></i></button>

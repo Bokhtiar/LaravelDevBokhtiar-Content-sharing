@@ -53,6 +53,7 @@ Route::group([ "as"=>'admin.' , "prefix"=>'admin' , "middleware"=>['auth','admin
     Route::get('/category/status/{id}', [App\Http\Controllers\Admin\CategoryController::class, 'status']);
     //category
     Route::resource('sub-category', SubCategoryController::class);
+    Route::get('/sub-category/status/{id}', [App\Http\Controllers\Admin\SubCategoryController::class, 'status']);
     //product
     Route::resource('product', ProductController::class);
     Route::get('/product/status/{id}', [App\Http\Controllers\Admin\ProductController::class, 'status']);

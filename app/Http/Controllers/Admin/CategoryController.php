@@ -57,7 +57,6 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'name' => 'required|max:25',
             'color' => 'required',
         ]);
 

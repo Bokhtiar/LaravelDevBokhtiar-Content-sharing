@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\SubCategory;
+use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
@@ -28,9 +29,12 @@ class SubCategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function status($id)
     {
-        //
+        $subcat = SubCategory::find($id);
+        Category::query()->Status($subcat);
+        Session::flash('Active','Status Update Successfully...');
+        return back();
     }
 
     /**
@@ -50,7 +54,7 @@ class SubCategoryController extends Controller
                 DB::beginTransaction();
                 $subcategory = SubCategory::create([
                     'name' => $request->name,
-                    'category_id' => $request->category_id,
+                    'category_id' => $request->categroy_id,
                     'status' => $request->status
                 ]);
                 if (!empty($subcategory)) {
@@ -84,7 +88,10 @@ class SubCategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $categories = Category::get(['id','name']);
+        $subcat = SubCategory::find($id);
+        $subcategories = SubCategory::get(['id','name','category_id','status']);
+        return view('admin.subcategory.index', compact('categories','subcat','subcategories'));
     }
 
     /**
@@ -96,7 +103,17 @@ class SubCategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $sub = SubCategory::find($id);
+        $sub->name = $request->name;
+        $sub->category_id = $request->categroy_id;
+        $sub->status = $request->status;
+        $sub->save();
+        Session::flash('update','Added Sucessfully...');
+
+        $categories = Category::get(['id','name']);
+        $subcategories = SubCategory::get(['id','name','category_id','status']);
+        return view('admin.subcategory.index', compact('categories','subcategories'));
+
     }
 
     /**
@@ -107,6 +124,8 @@ class SubCategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        SubCategory::find($id)->delete();
+        Session::flash('delete','delete Sucessfully...');
+        return back();
     }
 }
