@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\PrivacyController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\TermsOfServiceController;
 use App\Http\Controllers\Admin\TopHeaderController;
 use App\Models\Category;
@@ -50,7 +51,8 @@ Route::group([ "as"=>'admin.' , "prefix"=>'admin' , "middleware"=>['auth','admin
     Route::resource('category', CategoryController::class);
     Route::get('/category/search/{text}', [App\Http\Controllers\Admin\CategoryController::class, 'search']);
     Route::get('/category/status/{id}', [App\Http\Controllers\Admin\CategoryController::class, 'status']);
-
+    //category
+    Route::resource('sub-category', SubCategoryController::class);
     //product
     Route::resource('product', ProductController::class);
     Route::get('/product/status/{id}', [App\Http\Controllers\Admin\ProductController::class, 'status']);
