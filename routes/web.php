@@ -11,12 +11,14 @@ use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\TermsOfServiceController;
 use App\Http\Controllers\Admin\TopHeaderController;
 use App\Models\Category;
+use App\Models\SubCategory;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     $category = Category::find(1);//for slider active
     $categories = Category::query()->Active()->index();
+ 
     return view('welcome',compact('category', 'categories'));
 });
 
