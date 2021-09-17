@@ -12,19 +12,17 @@
               <li><i class="bx bx-chevron-right"></i> <a href="#home">Home</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#about">About us</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#services">Services</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{{ url('terms-of-service') }}">Terms of service</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{{ url('privacy-policy') }}">Privacy policy</a></li>
             </ul>
           </div>
 
           <div class="col-lg-3 col-md-6 footer-links">
             <h4>Our Services</h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+                @foreach ($front_categories as $item)
+                    <li><i class="bx bx-chevron-right"></i> <a href="http://localhost:8000/#google_product">{{ $item->name }}</a></li>
+                @endforeach
             </ul>
           </div>
 
@@ -34,15 +32,16 @@
               A108 Adam Street <br>
               New York, NY 535022<br>
               United States <br><br>
-              <strong>Phone:</strong> +1 5589 55488 55<br>
-              <strong>Email:</strong> info@example.com<br>
+              <strong>Phone:</strong> {{ $topheader->phone }}<br>
+              <strong>Email:</strong> {{ $topheader->email }}<br>
             </p>
 
           </div>
 
           <div class="col-lg-3 col-md-6 footer-info">
             <h3>About Anyar</h3>
-            <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus.</p>
+
+            <p>{{ $about->title }}.</p>
             <div class="social-links mt-3">
               <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
               <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>

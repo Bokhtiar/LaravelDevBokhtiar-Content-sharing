@@ -28,6 +28,8 @@ Route::post('contact/store', [App\Http\Controllers\User\ContactController::class
 Route::get('/blog', [App\Http\Controllers\User\BlogController::class, 'index']);
 Route::get('/blog/detail/{text}', [App\Http\Controllers\User\BlogController::class, 'show']);
 Route::post('/blog-search', [App\Http\Controllers\User\BlogController::class, 'search']);
+Route::get('/terms-of-service', [App\Http\Controllers\User\UserDashboardController::class, 'terms']);
+Route::get('/privacy-policy', [App\Http\Controllers\User\UserDashboardController::class, 'privacy']);
 Route::get('/logout', [App\Http\Controllers\User\UserDashboardController::class, 'logout']);
 
 
