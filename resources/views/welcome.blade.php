@@ -85,11 +85,11 @@
               <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0 my-4" data-aos="fade-up">
                 <div class="icon-box" >
                   <div class="icon"><i class="bx bxl-dribbble"></i></div>
-                  <h4 class="title">{{ $item->name }}</a></h4>
+                  <h4 class="title"> <a href="{{ url('category/product',$item->id) }}">{{ $item->name }}</a> </h4>
                   <p class="description">
                       <ul>
-                          @foreach (App\Models\SubCategory::where('category_id', $item->id)->get() as $item)
-                          <li style="list-style: none"><a href="">{{ $item->name }}</a></li>
+                          @foreach (App\Models\SubCategory::where('category_id', $item->id)->get() as $s)
+                          <li style="list-style: none"><a href="{{ url('subcategory/product',$s->id) }}">{{ $s->name }}</a></li>
                           @endforeach
                       </ul>
                   </p>
@@ -118,7 +118,7 @@
       </section><!-- End About Us Section -->
 
 
-            
+
 
 
 
