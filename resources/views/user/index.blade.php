@@ -33,9 +33,10 @@
                 <div class="col-md-5">
                     <div class="row">
                         <div class="col-12 bg-white p-0 px-3 py-3 mb-3">
-                            <div class="d-flex flex-column align-items-center"> <img class="photo"
+                            <div class="d-flex flex-column align-items-center">
+                                {{-- <img class="photo"
                                     src="https://images.unsplash.com/photo-1541647376583-8934aaf3448a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
-                                    alt="">
+                                    alt=""> --}}
                                 <p class="fw-bold h4 mt-3">{{ Auth::user()->name}}</p>
                                 <p class="text-muted">Welcome to Our Website</p>
                                 <div class="d-flex ">
@@ -49,10 +50,6 @@
                             <div class="d-flex justify-content-between border-bottom py-2 px-3">
                                 <p><span class="fas fa-globe me-2"></span>Order item</p> <a
                                     class="text-light btn btn-sm btn-primary" href="#order">GO...</a>
-                            </div>
-                            <div class="d-flex justify-content-between border-bottom py-2 px-3">
-                                <p><span class="fas fa-globe me-2"></span>Cart item</p> <a
-                                    class="text-light btn btn-sm btn-primary" href="#cart">GO...</a>
                             </div>
                             <div class="d-flex justify-content-between border-bottom py-2 px-3">
                                 <p><span class="fab fa-github-alt me-2"></span>Message</p> <a
@@ -102,92 +99,47 @@
                                                 <div class="modal-body">
                                                     <section class="container">
                                                         <div class="row">
-                                                            <div class="col-md-4">
+                                                            <div class="col-md-6">
                                                                 <h4>User Info</h4>
                                                                 <hr>
                                                                 <p>
-                                                                    <strong>Name:</strong>{{$order->name}} <br>
+                                                                    <strong>Name:</strong>{{$order->f_name .' '. $order->l_name}} <br>
                                                                     <strong>Phone:</strong>{{$order->phone}} <br>
                                                                     <strong>Email:</strong>{{$order->email}} <br>
-                                                                    <strong>Location:</strong>{{$order->location}} <br>
+                                                                    <strong>Country:</strong>{{$order->country}} <br>
                                                                 </p>
                                                             </div>
-                                                            <div class="col-md-4">
+                                                            <div class="col-md-6">
                                                                 <h4>Payment History</h4>
                                                                 <hr>
-                                                                <strong>Payment Type:</strong>{{$order->payment_name}}
+                                                                <strong>Payment Type:</strong>{{$order->payment_id}}
                                                                 <br>
                                                                 <strong>Payment
-                                                                    Number:</strong>{{$order->payment_number}} <br>
-                                                                <strong>Payment
-                                                                    Secrect</strong>{{$order->payment_secret}} <br>
-                                                            </div>
-                                                            <div class="col-md-4">
+                                                                    Number:</strong>
+                                                                    @if(isset($order->USDT_Wallet))
+                                                                    {{ $order->USDT_Wallet }}
+                                                                    @elseif (isset($order->Payoneer))
+                                                                    {{ $order->Payoneer }}
+                                                                    @elseif(isset($order->Perfect_Money_Usd))
+                                                                    {{ $order->Perfect_Money_Usd }}
+                                                                    @elseif(isset($order->Webmoney))
+                                                                    {{ $order->Webmoney }}
+                                                                    @elseif(isset($order->BTC_WALLET))
+                                                                    {{ $order->BTC_WALLET }}
+                                                                    @endif
+                                                                    <br>
 
-                                                                <h4>Details</h4>
-                                                                <hr>
-                                                                <strong>Comment:</strong>{{$order->description}} <br>
                                                             </div>
+                                                        <p class="mt-3">Your Product Detais:  <a class="btn btn-primary" href="{{ url('product/show',$order->product->id) }}">{{ $order->product->name }}</a> </p>
+
                                                         </div>
-                                                        <!--product details start here -->
-                                                        <section>
-                                                            <div class="row modal-body">
-                                                                @foreach(App\Models\Cart::where('order_id',$order->id)->get() as $cart)
-                                                                <div class="col-md-4 col-sm-12 col-lg-4">
-                                                                    <div class="text-center">
-                                                                        <div class="card">
-                                                                            <div class="card-header">
-                                                                                {{ $cart->product_id ?  $cart->product->name : '' }}
-                                                                            </div>
-                                                                            <div class="card-header">
-                                                                                {{ $cart->product_id ?  $cart->product->price : '' }}
-                                                                            </div>
-                                                                            <div class="card-body">
-                                                                                <span> {{ $cart->product_id ? $cart->product->menu1 :'' }}
-                                                                                </span><br>
-                                                                                <span> {{ $cart->product_id ? $cart->product->menu2 :'' }}
-                                                                                </span><br>
-                                                                                <span> {{ $cart->product_id ? $cart->product->menu3 :'' }}
-                                                                                </span><br>
-                                                                                <span> {{ $cart->product_id ? $cart->product->menu4 :'' }}
-                                                                                </span><br>
-                                                                                <span> {{ $cart->product_id ? $cart->product->menu5 :'' }}
-                                                                                </span><br>
-                                                                                <span> {{ $cart->product_id ? $cart->product->menu6 :'' }}
-                                                                                </span><br>
-                                                                                <span> {{ $cart->product_id ? $cart->product->menu7 :'' }}
-                                                                                </span><br>
-                                                                                <span> {{ $cart->product_id ? $cart->product->menu8 :'' }}
-                                                                                </span><br>
-                                                                                <span> {{ $cart->product_id ? $cart->product->menu9 :'' }}
-                                                                                </span><br>
-                                                                                <span> {{ $cart->product_id ? $cart->product->menu10 :'' }}
-                                                                                </span><br>
-                                                                                <span> {{ $cart->product_id ? $cart->product->menu11 :'' }}
-                                                                                </span><br>
-                                                                                <span> {{ $cart->product_id ? $cart->product->menu12 :'' }}
-                                                                                </span><br>
-                                                                                <span> {{ $cart->product_id ? $cart->product->menu13 :'' }}
-                                                                                </span><br>
-                                                                                <span> {{ $cart->product_id ? $cart->product->menu14 :'' }}
-                                                                                </span><br>
-                                                                                <span> {{ $cart->product_id ? $cart->product->menu15 :'' }}
-                                                                                </span><br>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                @endforeach
-                                                            </div>
-                                                            <section>
-                                                                @if ($order->status==0)
-                                                                <span>Order Status - Pending</span>
-                                                                @else
-                                                                <span>Order Status - Successfully</span>
-                                                                @endif
-                                                            </section>
-                                                        </section>
-                                                        <!--product detials show end here -->
+                                                        <p>
+                                                            @if ($order->status==0)
+                                                                <p class="text-danger mt-3">Order Status : pending</p>
+                                                            @else
+                                                                <p class="text-primary mt-3">Order Status : Success</p>
+                                                            @endif
+                                                        </p>
                                                     </section>
                                                 </div>
                                                 <!--end of modal body -->
@@ -201,109 +153,6 @@
                                     <!--modal end here-->
                                     @endforeach
                             </table>
-                        </div>
-                    </section>
-                    <!--end of cart -->
-
-
-
-                    <section id="cart">
-                        <div class="card-header">
-                            <h2 class="card-title">Cart Items </h2>
-                        </div>
-                        <div class="card-body table-responsive p-0">
-                            <table class="table table-hover  text-center" id="table">
-                                <tr>
-                                    <th>Index</th>
-                                    <th>Product Name</th>
-                                    <th>Quantity</th>
-                                    <th>Action</th>
-                                </tr>
-                                @foreach ($carts as $item)
-                                <tr>
-                                    <td>{{ $loop->index+1 }}</td>
-                                    <td>{{ $item->product->name }}</td>
-                                    <td>
-                                        <form action="" class="form-inline">
-                                            <input type="text" name="" class="form-control form-control-sm"
-                                                value="{{ $item->quantity }}" id="">
-                                            <input class="btn btn-sm btn-success" type="Submit" value="Submit" name=""
-                                                id="">
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-sm btn-info" data-toggle="modal"
-                                            data-target="#exampleModal{{ $item->id }}">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                        <a class="btn btn-sm btn-danger"
-                                            href="{{ url('admin/category/'.$item->id.'/edit') }}"><i
-                                                class="fas fa-trash"></i></a>
-                                    </td>
-                                </tr>
-
-                                <!--modal start here -->
-                                <div class="modal fade " id="exampleModal{{ $item->id }}" tabindex="-1" role="dialog"
-                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">{{ $item->name }}</h5>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="row justify-content-center">
-                                                    <div class="col-sm-12 col-md-6 col-lg-6">
-                                                        <div class="text-center">
-                                                            <div class="card">
-                                                                <div class="card-header">
-                                                                    {{ $item->product->name }}
-                                                                </div>
-                                                                <div class="card-header">
-                                                                    {{ $item->product->price }}
-                                                                </div>
-                                                                <div class="card-body">
-                                                                    <span> {{ $item->product->menu1 }} </span><br>
-                                                                    <span> {{ $item->product->menu2 }} </span><br>
-                                                                    <span> {{ $item->product->menu3 }} </span><br>
-                                                                    <span> {{ $item->product->menu4 }} </span><br>
-                                                                    <span> {{ $item->product->menu5 }} </span><br>
-                                                                    <span> {{ $item->product->menu6 }} </span><br>
-                                                                    <span> {{ $item->product->menu7 }} </span><br>
-                                                                    <span> {{ $item->product->menu8 }} </span><br>
-                                                                    <span> {{ $item->product->menu9 }} </span><br>
-                                                                    <span> {{ $item->product->menu10 }} </span><br>
-                                                                    <span> {{ $item->product->menu11 }} </span><br>
-                                                                    <span> {{ $item->product->menu12 }} </span><br>
-                                                                    <span> {{ $item->product->menu13 }} </span><br>
-                                                                    <span> {{ $item->product->menu14 }} </span><br>
-                                                                    <span> {{ $item->product->menu15 }} </span><br>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-dismiss="modal">Close</button>
-                                    </div>
-                                </div>
-                                <!--modal end here-->
-                                @endforeach
-                            </table>
-                            @if (!empty(App\Models\Cart::total_item_cart()))
-                            <div class="float-right">
-                                <a href="{{ url('user/checkout') }}" class="btn btn-primary btn-sm">Checkout</a>
-                            </div>
-                            @endif
                         </div>
                     </section>
                     <!--end of cart -->

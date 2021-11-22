@@ -37,6 +37,8 @@ Route::get('/logout', [App\Http\Controllers\User\UserDashboardController::class,
 Route::get('/category/product/{id}', [App\Http\Controllers\User\CategoryController::class, 'category_ways_product_show']);
 //subcategory
 Route::get('/subcategory/product/{id}', [App\Http\Controllers\User\CategoryController::class, 'subcategory_ways_product_show']);
+//product details
+Route::get('/product/show/{id}', [App\Http\Controllers\User\ProductController::class, 'show']);
 
 
 Route::post('/order/store', [App\Http\Controllers\User\OrderController::class, 'store']);
