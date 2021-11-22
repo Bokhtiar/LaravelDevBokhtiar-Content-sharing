@@ -48,12 +48,12 @@
               <li>{{ $item->menu7 }}</li>
               <li>{{ $item->menu8 }}</li>
               <li>{{ $item->menu9 }}</li>
-              <li>{{ $item->menu10 }}</li>
+              {{--<li>{{ $item->menu10 }}</li>
               <li>{{ $item->menu11 }}</li>
               <li>{{ $item->menu12 }}</li>
               <li>{{ $item->menu13 }}</li>
               <li>{{ $item->menu14 }}</li>
-              <li>{{ $item->menu15 }}</li>
+              <li>{{ $item->menu15 }}</li> --}}
             </ul>
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter{{ $item->id }}">

@@ -11,7 +11,6 @@
             <ul>
               <li><i class="bx bx-chevron-right"></i> <a href="#home">Home</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#about">About us</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#services">Services</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="{{ url('terms-of-service') }}">Terms of service</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="{{ url('privacy-policy') }}">Privacy policy</a></li>
             </ul>
@@ -21,7 +20,7 @@
             <h4>Our Services</h4>
             <ul>
                 @foreach ($front_categories as $item)
-                    <li><i class="bx bx-chevron-right"></i> <a href="http://localhost:8000/#google_product">{{ $item->name }}</a></li>
+                    <li><i class="bx bx-chevron-right"></i> <a href="{{ url('category/product',$item->id) }}">{{ $item->name }}</a></li>
                 @endforeach
             </ul>
           </div>

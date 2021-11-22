@@ -126,7 +126,7 @@
                                 <input type="text" placeholder="Product menu9" value="{{ @$product->menu9 }}" name="menu9" class="form-control" id="">
                             </div>
 
-                            <div class="col-sm-12 col-md-4 col-lg-4">
+                            {{-- <div class="col-sm-12 col-md-4 col-lg-4">
                                 <input type="text" placeholder="Product menu10" value="{{ @$product->menu10 }}" name="menu10" class="form-control" id="">
                             </div>
 
@@ -148,7 +148,7 @@
 
                             <div class="col-sm-12 col-md-4 col-lg-4">
                                 <input type="text" placeholder="Product menu15" value="{{ @$product->menu15 }}" name="menu15" class="form-control" id="">
-                            </div>
+                            </div> --}}
                     </div><!--product menus end -->
 
                     <div class="form-group float-right my-2">

@@ -82,7 +82,7 @@
                                               {{ $item->name }}
                                             </div>
                                             <div class="card-header">
-                                             <span>Piches {{ $item->piches }}Pc</span> <span> Price ${{ $item->price }}</span>
+                                             <span> <span>Per pc Price ${{ $item->price }}</span>
                                             </div>
                                             <div class="card-body">
                                               <span> {{ $item->menu1 }} </span><br>
@@ -94,12 +94,12 @@
                                               <span> {{ $item->menu7 }} </span><br>
                                               <span> {{ $item->menu8 }} </span><br>
                                               <span> {{ $item->menu9 }} </span><br>
-                                              <span> {{ $item->menu10 }} </span><br>
+                                              {{-- <span> {{ $item->menu10 }} </span><br>
                                               <span> {{ $item->menu11 }} </span><br>
                                               <span> {{ $item->menu12 }} </span><br>
                                               <span> {{ $item->menu13 }} </span><br>
                                               <span> {{ $item->menu14 }} </span><br>
-                                              <span> {{ $item->menu15 }} </span><br>
+                                              <span> {{ $item->menu15 }} </span><br> --}}
                                               <a href="#" class="btn btn-primary">Buy Now</a>
                                             </div>
                                           </div>

@@ -35,9 +35,8 @@ class ProductController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|unique:categories|max:35',
-            'price' => 'required',
+            'price' => 'required ',
             'category_id'=>'required',
-            'piches'=>'required',
             'subCategory_id'=>'required',
         ]);
         if($validated){
@@ -125,7 +124,7 @@ class ProductController extends Controller
                 $product = $product->update([
                     'name' => $request->name,
                     'price'=> $request->price,
-                    'piches'=>$request->piches,
+                    'piches'=>2,
                     'subCategory_id'=>$request->subCategory_id,
                     'category_id' => $request->category_id,
                     'menu1'=>$request->menu1,
