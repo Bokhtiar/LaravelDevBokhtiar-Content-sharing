@@ -17,7 +17,9 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->integer('price');
-            $table->unsignedBigInteger('category_id');
+            $table->integer('piches');
+            $table->integer('category_id');
+            $table->integer('subCategory_id');
             $table->string('menu1')->nullable();
             $table->string('menu2')->nullable();
             $table->string('menu3')->nullable();
@@ -35,8 +37,8 @@ class CreateProductsTable extends Migration
             $table->string('menu15')->nullable();
             $table->tinyInteger('status')->default(0);
             $table->timestamps();
-            
-            $table->foreign("category_id")->references("id")->on('categories')->onDelete('cascade');
+
+
         });
     }
 

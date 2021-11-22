@@ -21,11 +21,19 @@
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-          <li><a href="http://localhost:8000/#home">Home</a></li>
+          <li><a href="http://localhost:8000/">Home</a></li>
           <li><a href="http://localhost:8000/#about">About</a></li>
-          <li><a href="http://localhost:8000/#services">Services</a></li>
+          <li><a href="http://localhost:8000/#contact">Contact Us</a></li>
           <li><a href="{{ url('blog') }}">Blog</a></li>
-          <li><a href="http://localhost:8000/#google_product">Our Google_product</a></li>
+          <li class="drop-down"><a href="">Buy Accounts</a>
+            <ul>
+                @foreach ($front_categories as $item)
+                <li><a href="{{ url('category/product/'.$item->id) }}">{{ $item->name }}</a></li>
+                @endforeach
+            </ul>
+          </li>
+
+          {{-- <li><a href="http://localhost:8000/#google_product">Our Google_product</a></li> --}}
 
           @if (!empty(App\Models\Cart::total_item_cart()))
           <li><a href="http://localhost:8000/user/dashboard#cart">cart{{ App\Models\Cart::total_item_cart() }}</a></li>

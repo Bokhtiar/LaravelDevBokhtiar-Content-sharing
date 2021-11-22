@@ -46,21 +46,20 @@
           <!-- Slide 1 -->
           <div class="carousel-item active">
             <div class="carousel-container">
-              <h2 class="animate__animated animate__fadeInDown">{{ $category->name }}</h2>
-              <p class="animate__animated animate__fadeInUp">{{ $category->description }}</p>
-              <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
+              <img src="{{ asset('user/slider/gmail1.jpg') }}" class="d-block w-100" alt="...">
+            </div>
+          </div>
+            <div class="carousel-item">
+            <div class="carousel-container">
+              <img src="{{ asset('user/slider/gmail2.jpg') }}" class="d-block w-100" alt="">
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="carousel-container">
+              <img src="{{ asset('user/slider/gmail3.png') }}" class="d-block w-100" alt="">
             </div>
           </div>
 
-        @foreach ($front_categories as $item)
-        <div class="carousel-item">
-            <div class="carousel-container">
-              <h2 class="animate__animated animate__fadeInDown">{{ $item->name }}</h2>
-              <p class="animate__animated animate__fadeInUp">{{ $item->description }}</p>
-              <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
-            </div>
-          </div>
-        @endforeach
 
 
 
@@ -119,78 +118,9 @@
       </section><!-- End About Us Section -->
 
 
-            <!-- ======= google product Section ======= -->
-            <section id="google_product" class="portfoio pricing">
-                <div class="container" data-aos="fade-up">
-                  <div class="section-title">
-                    <h2>Our Google Product</h2>
-                    <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-12 d-flex justify-content-center">
-                      <ul id="portfolio-flters">
-                        @foreach ($front_categories as $item)
-                        <li data-filter=".{{$item->id}}">{{ $item->name }}</li>
-                        @endforeach
-                      </ul>
-                    </div>
-                  </div>
-
-                  <div class="row portfolio-container">
-                    @foreach (App\Models\Product::query()->Active()->get() as $item)
-                    <div class="col-lg-4 col-md-6 portfolio-item {{$item->category_id}}">
-                      <div class="box featured">
-                        <h3>{{ $item->name }}</h3>
-                        <h4><sup>$</sup>{{ $item->price }}<span></span></h4>
-                        <ul>
-                          <li>{{ $item->menu1 }}</li>
-                          <li>{{ $item->menu2 }}</li>
-                          <li>{{ $item->menu3 }}</li>
-                          <li>{{ $item->menu4 }}</li>
-                          <li>{{ $item->menu5 }}</li>
-                          <li>{{ $item->menu6 }}</li>
-                          <li>{{ $item->menu7 }}</li>
-                          <li>{{ $item->menu8 }}</li>
-                          <li>{{ $item->menu9 }}</li>
-                          <li>{{ $item->menu10 }}</li>
-                          <li>{{ $item->menu11 }}</li>
-                          <li>{{ $item->menu12 }}</li>
-                        </ul>
-                        <div class="btn-wrap">
-                          <a href="{{ url('user/add-to-cart/store/'.$item->id) }}" class="btn-buy">Buy Now</a>
-                        </div>
-                      </div>
-                      </div>
-                    @endforeach
-                  </div>
-                </div>
-              </section><!-- End google product Section -->
+            
 
 
-      <!-- ======= Services Section ======= -->
-      <section id="services" class="services">
-        <div class="container" data-aos="fade-up">
-
-          <div class="section-title">
-            <h2>Services</h2>
-            <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-          </div>
-
-          <div class="row">
-            @foreach ($front_categories as $item)
-                <div class="col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
-                    <div class="icon-box">
-                    <i class="icofont-computer"></i>
-                    <h4><a href="#">{{$item->name}}</a></h4>
-                    <p>{{$item->description}}</p>
-                    </div>
-                </div>
-            @endforeach
-          </div>
-
-        </div>
-      </section><!-- End Services Section -->
 
       <!-- ======= Contact Section ======= -->
       <section id="contact" class="contact">

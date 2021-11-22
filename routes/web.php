@@ -18,7 +18,6 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {
     $category = Category::find(1);//for slider active
     $categories = Category::query()->Active()->index();
- 
     return view('welcome',compact('category', 'categories'));
 });
 
@@ -34,8 +33,10 @@ Route::post('/blog-search', [App\Http\Controllers\User\BlogController::class, 's
 Route::get('/terms-of-service', [App\Http\Controllers\User\UserDashboardController::class, 'terms']);
 Route::get('/privacy-policy', [App\Http\Controllers\User\UserDashboardController::class, 'privacy']);
 Route::get('/logout', [App\Http\Controllers\User\UserDashboardController::class, 'logout']);
+//category
+Route::get('/category/product/{id}', [App\Http\Controllers\User\CategoryController::class, 'category_ways_product_show']);
 
-
+Route::post('/order/store', [App\Http\Controllers\User\OrderController::class, 'store']);
 
 Route::group([ "as"=>'user.' , "prefix"=>'user' , "namespace"=>'User' , "middleware"=>['auth','user']],function(){
     Route::get('/dashboard', [App\Http\Controllers\User\UserDashboardController::class, 'index'])->name('dashboard');

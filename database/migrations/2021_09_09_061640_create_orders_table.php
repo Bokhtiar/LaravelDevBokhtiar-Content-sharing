@@ -19,9 +19,18 @@ class CreateOrdersTable extends Migration
             $table->string('l_name');
             $table->string('email');
             $table->integer('user_id');
+            $table->integer('product_id');
+            $table->string('country');
+            $table->string('phone')->nullable();
+            $table->integer('qty');
             $table->string('payment_id');
-            $table->string('payment_number');
-            $table->string('description');
+
+            $table->string('USDT_Wallet')->nullable();
+            $table->string('Payoneer')->nullable();
+            $table->string('Perfect_Money_Usd')->nullable();
+            $table->string('Webmoney')->nullable();
+            $table->string('BTC_WALLET')->nullable();
+
             $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });

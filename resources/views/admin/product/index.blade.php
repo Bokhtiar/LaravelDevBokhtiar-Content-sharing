@@ -41,7 +41,7 @@
                     <td>{{ $loop->index+1 }}</td>
                     <td>{{ $item->name }}</td>
                     <td>{{ $item->price }}</td>
-                    <td>{{ $item->category_id ? $item->category->name :'' }}</td>
+                    <td>{{ $item->category ? $item->category->name :'' }}</td>
                     <td>
                         @if($item->status==0)
                         <span> <a class="badge badge-danger" href="{{ url('admin/product/status/'.$item->id) }}">In-active</a> </span>
@@ -82,7 +82,7 @@
                                               {{ $item->name }}
                                             </div>
                                             <div class="card-header">
-                                              {{ $item->price }}
+                                             <span>Piches {{ $item->piches }}Pc</span> <span> Price ${{ $item->price }}</span>
                                             </div>
                                             <div class="card-body">
                                               <span> {{ $item->menu1 }} </span><br>

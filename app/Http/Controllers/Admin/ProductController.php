@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
@@ -20,7 +21,8 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::query()->Active()->get();
-        return view('admin.product.createOrUpdate', compact('categories'));
+        $subCategories = SubCategory::get();
+        return view('admin.product.createOrUpdate', compact('categories', 'subCategories' ));
     }
 
     /**
@@ -35,14 +37,18 @@ class ProductController extends Controller
             'name' => 'required|unique:categories|max:35',
             'price' => 'required',
             'category_id'=>'required',
+            'piches'=>'required',
+            'subCategory_id'=>'required',
         ]);
-
         if($validated){
             try{
                 DB::beginTransaction();
+
                 $product = Product::create([
                     'name' => $request->name,
                     'price'=> $request->price,
+                    'piches'=>$request->piches,
+                    'subCategory_id'=>$request->subCategory_id,
                     'category_id' => $request->category_id,
                     'menu1'=>$request->menu1,
                     'menu2'=>$request->menu2,
@@ -93,7 +99,8 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $categories = Category::query()->Active()->get();
-        return view('admin.product.createOrUpdate', compact('product','categories'));
+        $subCategories = SubCategory::get();
+        return view('admin.product.createOrUpdate', compact('product','categories','subCategories'));
     }
 
     /**
@@ -118,6 +125,8 @@ class ProductController extends Controller
                 $product = $product->update([
                     'name' => $request->name,
                     'price'=> $request->price,
+                    'piches'=>$request->piches,
+                    'subCategory_id'=>$request->subCategory_id,
                     'category_id' => $request->category_id,
                     'menu1'=>$request->menu1,
                     'menu2'=>$request->menu2,

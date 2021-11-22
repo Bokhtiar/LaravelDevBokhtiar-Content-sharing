@@ -12,9 +12,15 @@ class Order extends Model
     use CrudTrait;
 
     protected $fillable = [
-        'f_name', 'l_name', 'user_id', 'email', 'payment_id', 'payment_number', 'status','description'
+        'f_name', 'l_name', 'user_id', 'product_id','country', 'phone', 'email', 'qty', 'payment_id',
+        'USDT_Wallet','Payoneer','Perfect_Money_Usd','Webmoney','BTC_WALLET', 'status',
     ];
 
+    public function scopeuser_id(){
+        $user = User::latest()->first();
+        $id = $user->id + 1;
+        return $id;
+    }
     public function user(){
         return $this->belongsTo(User::class);
     }
