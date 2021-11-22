@@ -17,9 +17,12 @@ class OrderController extends Controller
     {
 
 
-        $this->validate($request, [
-            'l_name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
+        $validatedData = $request->validate([
+            'email' => ['required', 'unique:orders', 'max:255'],
+            'country' => ['required'],
+            'qty' => ['required'],
+            'f_name' => ['required'],
+            'l_name' => ['required'],
         ]);
 
         $data = $request->all();
@@ -31,7 +34,7 @@ class OrderController extends Controller
                 ]);
         Auth::login($user);
         $order= new Order;
-  
+
         $order['f_name'] = $request->f_name;
         $order['l_name'] = $request->l_name;
         $order['email'] = $request->email;

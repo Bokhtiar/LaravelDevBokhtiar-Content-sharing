@@ -18,7 +18,7 @@ class Order extends Model
 
     public function scopeuser_id(){
         $user = User::latest()->first();
-        $id = $user->id + 1;
+        $id = $user->id;
         return $id;
     }
     public function user(){

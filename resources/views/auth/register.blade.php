@@ -1,11 +1,23 @@
-@extends('layouts.app')
+@extends('layouts.user.app')
+@section('page_title', 'Registration')
+@section('user_content')
 
-@section('content')
+<!-- ======= Breadcrumbs ======= -->
+<section id="breadcrumbs" class="breadcrumbs">
+    <div class="container">
+
+      <ol>
+        <li><a href="{{ url('/') }}">Home</a></li>
+        <li><a href="{{ route('login') }}">Login</a></li>
+      </ol>
+
+    </div>
+  </section><!-- End Breadcrumbs -->
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+                <div class="card-header">{{ __('Register Form') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">

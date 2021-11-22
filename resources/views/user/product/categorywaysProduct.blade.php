@@ -13,6 +13,16 @@
 
     </div>
   </section><!-- End Breadcrumbs -->
+  @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    <li>Please Login</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
 <!-- ======= google product Section ======= -->
 <section id="google_product" class="portfoio pricing">
     <div class="container">
@@ -23,7 +33,7 @@
 
       <div class="row portfolio-container">
         @foreach ($products as $item)
-        <div class="col-lg-4 col-md-6 portfolio-item {{$item->category_id}}">
+        <div class="col-lg-4 col-md-6 portfolio-item">
           <div class="box featured">
             <h3>{{ $item->name }}</h3>
             {{-- <h4> <sup>Price $</sup>{{ $item->price }}<span></span></h4> --}}
@@ -71,20 +81,20 @@
                                 <div class="row">
                                     <div class="col-sm-12 col-md-6 col-lg-6">
                                         <label for="">First Name: <span class="text-danger">*</span></label>
-                                        <input type="text" placeholder="First Name" name="f_name" class="form-control" id="">
+                                        <input required type="text" placeholder="First Name" name="f_name" class="form-control" id="">
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-lg-6">
                                         <label for="">Last Name:<span class="text-danger">*</span></label>
-                                        <input type="text" placeholder="Last Name" name="l_name" class="form-control" id="">
+                                        <input required type="text" placeholder="Last Name" name="l_name" class="form-control" id="">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="">E-mail <span class="text-danger">*</span></label>
-                                    <input type="email" placeholder="E-mail" name="email" class="form-control" id="">
+                                    <input required type="email" placeholder="E-mail" name="email" class="form-control" id="">
                                 </div>
                                 <div class="form-group">
                                     <label for="">Country <span class="text-danger">*</span></label>
-                                    <input type="text" placeholder="Country" name="country" class="form-control" id="">
+                                    <input required type="text" placeholder="Country" name="country" class="form-control" id="">
                                 </div>
                                 <div class="form-group">
                                     <label for="">Phone(optional)</label>
@@ -93,7 +103,7 @@
 
                                 <div class="form-group">
                                     <label for="">Quantity</label>
-                                    <input type="number"  id="qty" oninput="purchase_qty(this.value)" placeholder="Quantity" name="qty" class="form-control" >
+                                    <input required type="number"  id="qty" oninput="purchase_qty(this.value)" placeholder="Quantity" name="qty" class="form-control" >
                                     <input type="hidden" id="price" value="{{ $item->price }}">
                                     <input type="hidden" name="product_id" value="{{ $item->id }}" id="">
                                 </div>
@@ -104,7 +114,7 @@
 
                                 <div class="form-group">
                                     <label for="">Select Payment Getway</label>
-                                    <select class="form-control" name="payment_id" id="payment_getway">
+                                    <select required class="form-control" name="payment_id" id="payment_getway">
                                         <option value="">Select Payment Getway</option>
                                         <option value="USDT Wallet">USDT Wallet</option>
                                         <option value="Payoneer">Payoneer</option>

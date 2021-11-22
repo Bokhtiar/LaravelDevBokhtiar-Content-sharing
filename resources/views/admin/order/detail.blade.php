@@ -10,102 +10,65 @@
                 <h4>User Info</h4>
                 <hr>
                 <p>
-                    <strong>Name:</strong>{{$order->name}} <br>
+                    <strong>Name:</strong>{{$order->f_name .' '. $order->l_name}} <br>
                     <strong>Phone:</strong>{{$order->phone}} <br>
                     <strong>Email:</strong>{{$order->email}} <br>
-                    <strong>Location:</strong>{{$order->location}} <br>
+                    <strong>Country:</strong>{{$order->country}} <br>
                 </p>
             </div>
             <div class="col-md-4">
                 <h4>Payment History</h4>
                 <hr>
-                <strong>Payment Type:</strong>{{$order->payment_name}}
+                <strong>Payment Type:</strong>{{$order->payment_id}}
                 <br>
                 <strong>Payment
-                    Number:</strong>{{$order->payment_number}} <br>
-                <strong>Payment
-                    Secrect</strong>{{$order->payment_secret}} <br>
+                    Number:</strong>
+                    @if(isset($order->USDT_Wallet))
+                    {{ $order->USDT_Wallet }}
+                    @elseif (isset($order->Payoneer))
+                    {{ $order->Payoneer }}
+                    @elseif(isset($order->Perfect_Money_Usd))
+                    {{ $order->Perfect_Money_Usd }}
+                    @elseif(isset($order->Webmoney))
+                    {{ $order->Webmoney }}
+                    @elseif(isset($order->BTC_WALLET))
+                    {{ $order->BTC_WALLET }}
+                    @endif
+                    <br>
+
             </div>
             <div class="col-md-4">
-
-                <h4>Details</h4>
+                <h4>Product Quantity</h4>
                 <hr>
-                <strong>Comment:</strong>{{$order->description}} <br>
+                <p>
+                    <strong>Quantity: </strong>Pc{{$order->qty}} <br>
+
+                </p>
+            </div>
+        <p class="mt-3">Your Product Detais:  <a class="btn btn-primary" href="{{ url('product/show',$order->product->id) }}">{{ $order->product->name }}</a> </p>
+
+        </div>
+
+
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title d-flex justify-content-between">
+                    @php
+                        $price = $order->product->price;
+                        $total = $order->qty * $order->product->price;
+                    @endphp
+                    <p>Amount is : ${{ $total }}</p>
+                    <p>
+                        @if ($order->status==0)
+                            <p class="text-danger mt-3">Order Status : pending</p>
+                        @else
+                            <p class="text-primary mt-3">Order Status : Success</p>
+                        @endif
+                    </p>
+                </div>
             </div>
         </div>
-        <!--product details start here -->
-        <section>
-            <div class="row modal-body">
-                @php
-                    $total = 0;
-                @endphp
-                @foreach(App\Models\Cart::where('order_id',$order->id)->get() as $cart)
-                <div class="col-md-4 col-sm-12 col-lg-4">
-                    <div class="text-center">
-                        <div class="card">
-                            <div class="card-header">
-                                {{ $cart->product->name }}
-                            </div>
-                            <div class="card-header">
-                                {{ $cart->product->price * $cart->quantity}}
-                               <?php
-                                     $total += $cart->product->price * $cart->quantity;
-                                     ?>
-
-
-                            </div>
-                            <div class="card-header">
-                                Cart Quantity:{{ $cart->quantity }}
-                            </div>
-                            <div class="card-body">
-                                <span> {{ $cart->product->menu1 }}
-                                </span><br>
-                                <span> {{ $cart->product->menu2 }}
-                                </span><br>
-                                <span> {{ $cart->product->menu3 }}
-                                </span><br>
-                                <span> {{ $cart->product->menu4 }}
-                                </span><br>
-                                <span> {{ $cart->product->menu5 }}
-                                </span><br>
-                                <span> {{ $cart->product->menu6 }}
-                                </span><br>
-                                <span> {{ $cart->product->menu7 }}
-                                </span><br>
-                                <span> {{ $cart->product->menu8 }}
-                                </span><br>
-                                <span> {{ $cart->product->menu9 }}
-                                </span><br>
-                                <span> {{ $cart->product->menu10 }}
-                                </span><br>
-                                <span> {{ $cart->product->menu11 }}
-                                </span><br>
-                                <span> {{ $cart->product->menu12 }}
-                                </span><br>
-                                <span> {{ $cart->product->menu13 }}
-                                </span><br>
-                                <span> {{ $cart->product->menu14 }}
-                                </span><br>
-                                <span> {{ $cart->product->menu15 }}
-                                </span><br>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                @endforeach
-            </div>
-            <div class="card-footer clearfix">
-                <span class="btn btn-sm btn-danger float-right">
-                    @if ($order->status==0)
-                    <span>Order Status - Pending</span>
-                    @else
-                    <span>Order Status - Successfully</span>
-                    @endif
-                </span>
-                <span class="btn btn-sm btn-primary float-left">Net Amount: {{$total}}</span>
-              </div>
-        </section>
-        <!--product detials show end here -->
     </section>
 </div>
 

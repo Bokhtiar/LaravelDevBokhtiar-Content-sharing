@@ -53,7 +53,7 @@
                         <div class="col-sm-12 col-md-4 col-lg-4">
                             <div class="form-group">
                                 <label for="">Product Price <span class="text-danger">*</span> </label>
-                                <input type="number" class="form-control" name="price" placeholder="Product Price" value="{{ @$product->price }}" id="">
+                                <input type="text" class="form-control" name="price" placeholder="Product Price" value="{{ @$product->price }}" id="">
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-4 col-lg-4">
@@ -62,26 +62,26 @@
                                 <select class="form-control select2" style="width: 100%;" name="category_id">
 
                                     @foreach ($categories as $item)
-                                    <option value="{{ $item->id }}" {{ $product->category_id == $item->id ? 'selected' :'' }} >{{ $item->name }} </option>
+                                    <option value="{{ $item->id }}" {{ @$product->category_id == $item->id ? 'selected' :'' }} >{{ $item->name }} </option>
                                     @endforeach
                                   </select>
                             </div>
                         </div>
                     </div><!--name,price,category_id form end -->
 
-                    <div class="row">
-                        <div class="col-sm-12 col-md-6 col-lg6">
+                    <div class="">
+                        {{-- <div class="col-sm-12 col-md-6 col-lg6">
                             <div class="form-group">
                                 <label for="">Product piches <span class="text-danger">*</span> </label>
                                 <input type="number" class="form-control" name="piches" placeholder="Product Piches" value="{{ @$product->piches }}" id="">
                             </div>
-                        </div>
-                        <div class="col-sm-12 col-md-6 col-lg6">
+                        </div> --}}
+                        <div class="">
                             <div class="form-group">
                                 <label for="">Product Sub-Category <span class="text-danger">*</span> </label>
                                 <select class="form-control select2" style="width: 100%;" name="subCategory_id">
                                     @foreach ($subCategories as $s)
-                                    <option value="{{ $s->id }}" {{ $product->subCategory_id == $s->id ? 'selected' :'' }} >{{ $s->name }} </option>
+                                    <option value="{{ $s->id }}" {{ @$product->subCategory_id == $s->id ? 'selected' :'' }} >{{ $s->name }} </option>
                                     @endforeach
                                   </select>
                             </div>
